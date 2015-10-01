@@ -24,8 +24,8 @@
     'version': '1.0',
     'category': 'Noemis - Custom',
     'description': """
-Change default reporting
-========================
+Change default Printing
+=======================
 
 * Add a new report on sale.order model, named 'Proforma Quotation';
     """,
