@@ -27,7 +27,7 @@
 Change default reporting
 ========================
 
-* Add a new report on sale.order model, named 'pro-forma';
+* Add a new report on sale.order model, named 'Proforma Quotation';
     """,
     'author': 'Noemis',
     'website': 'http://www.noemis.fr',
@@ -36,5 +36,7 @@ Change default reporting
         'sale',
     ],
     'data': [
+        'data/report.xml',
+        'data/email_template.xml',
     ],
 }

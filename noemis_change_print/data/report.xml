@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report auto="False" id="report_noemis_sale_order_proforma"
+            model="sale.order"
+            name="report_noemis_sale_order_proforma"
+            rml="noemis_change_print/report/sale_order_proforma.rml"
+            string="Proforma Quotation"
+            usage="default"/>
+
+    </data>
+</openerp>
