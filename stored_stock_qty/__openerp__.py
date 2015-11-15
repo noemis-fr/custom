@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Noemis - Stored Stock Quantity module for Odoo
+#    Stored Stock Quantity module for Odoo
 #    Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,9 +20,9 @@
 ##############################################################################
 
 {
-    'name': 'Noemis - Stored Stock Quantity',
+    'name': 'Stored Stock Quantity',
     'version': '1.0',
-    'category': 'Noemis - Custom',
+    'category': 'Stock',
     'description': """
 Compute and store in Database Stock value
 =========================================
@@ -34,8 +34,13 @@ Compute and store in Database Stock value
 * Allows to reorder product by qty in a tree view.
 
 * Adds two filters, quantity > 0 and quantity <= 0
+
+Copyright
+---------
+* Noemis (http://www.noemis.fr)
+
     """,
-    'author': 'Noemis',
+    'author': 'Sylvain LE GAL',
     'website': 'http://www.noemis.fr',
     'license': 'AGPL-3',
     'depends': [
