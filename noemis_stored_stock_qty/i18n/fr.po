@@ -1,0 +1,64 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* noemis_stored_stock_qty
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-04 21:13+0000\n"
+"PO-Revision-Date: 2015-10-04 21:13+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "FQ"
+msgstr "Q. prévue"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "Forcasted Quantity <= 0"
+msgstr "Quantité prévue <= 0"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "Forcasted Quantity > 0"
+msgstr "Quantité prévue > 0"
+
+#. module: noemis_stored_stock_qty
+#: field:product.product,stored_virtual_available:0
+msgid "Forecasted Quantity (Stored Field)"
+msgstr "Quantité prévue (Champ stocké)"
+
+#. module: noemis_stored_stock_qty
+#: code:_description:0
+#: model:ir.model,name:noemis_stored_stock_qty.model_product_product
+#, python-format
+msgid "Product"
+msgstr "Article"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "QOH"
+msgstr "Q. stock"
+
+#. module: noemis_stored_stock_qty
+#: field:product.product,stored_qty_available:0
+msgid "Quantity On Hand (Stored Field)"
+msgstr "Quantité en stock (Champ stocké)"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "Quantity On Hand <= 0"
+msgstr "Quantité en stock <= 0"
+
+#. module: noemis_stored_stock_qty
+#: view:product.product:0
+msgid "Quantity On Hand > 0"
+msgstr "Quantité en stock > 0"
+

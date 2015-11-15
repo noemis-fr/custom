@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!-- Noemis - Stored Stock Quantity module for Odoo                         -->
+<!-- Copyright (C) 2015-Today Noemis (http://www.noemis.fr)                 -->
+
+<!--This program is free software: you can redistribute it and/or modify    -->
+<!--it under the terms of the GNU Affero General Public License as          -->
+<!--published by the Free Software Foundation, either version 3 of the      -->
+<!--License, or (at your option) any later version.                         -->
+
+<!--This program is distributed in the hope that it will be useful,         -->
+<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!--GNU Affero General Public License for more details.                     -->
+
+<!--You should have received a copy of the GNU Affero General Public License-->
+<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
+<!-- ********************************************************************** -->
+<openerp>
+    <data>
+
+        <record id="view_product_product_tree" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" />
+            <field name="arch" type="xml">
+                <field name="qty_available" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="qty_available" position="after">
+                    <field name="stored_qty_available" string="QOH"/>
+                </field>
+                <field name="virtual_available" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="virtual_available" position="after">
+                    <field name="stored_virtual_available" string="FQ"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_product_product_search" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <filter string="Quantity On Hand &gt; 0" name="qty_available_positive" domain="[('stored_qty_available', '&gt;', 0)]" />
+                    <filter string="Quantity On Hand &lt;= 0" name="qty_available_negative" domain="[('stored_qty_available', '&lt;=', 0)]" />
+                    <separator/>
+                    <filter string="Forcasted Quantity &gt; 0" name="virtual_available_positive" domain="[('stored_virtual_available', '&gt;', 0)]" />
+                    <filter string="Forcasted Quantity &lt;= 0" name="virtual_available_negative" domain="[('stored_virtual_available', '&lt;=', 0)]" />
+                    <separator/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
