@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Noemis - No Sale Warning module for Odoo
+#    No Sale Warning module for Odoo
 #    Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,20 +20,22 @@
 ##############################################################################
 
 {
-    'name': 'Noemis - No Sale Warning',
+    'name': 'No Sale Warning',
     'version': '1.0',
-    'category': 'Noemis - Custom',
+    'category': 'Sale',
     'description': """
 Remove Sale Warning if there is not enough stock
 ================================================
 
+Copyright
+---------
+* Noemis (http://www.noemis.fr)
+
     """,
-    'author': 'Noemis',
+    'author': 'Sylvain LE GAL',
     'website': 'http://www.noemis.fr',
     'license': 'AGPL-3',
     'depends': [
         'sale_stock',
-    ],
-    'data': [
     ],
 }
