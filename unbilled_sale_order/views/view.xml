@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!-- Unbilled Sale Order module for Odoo                                    -->
+<!-- Copyright (C) 2015-Today Noemis (http://www.noemis.fr)                 -->
+
+<!--This program is free software: you can redistribute it and/or modify    -->
+<!--it under the terms of the GNU Affero General Public License as          -->
+<!--published by the Free Software Foundation, either version 3 of the      -->
+<!--License, or (at your option) any later version.                         -->
+
+<!--This program is distributed in the hope that it will be useful,         -->
+<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!--GNU Affero General Public License for more details.                     -->
+
+<!--You should have received a copy of the GNU Affero General Public License-->
+<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
+<!-- ********************************************************************** -->
+<openerp>
+    <data>
+
+        <record id="view_sale_order_tree" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="amount_untaxed_unbilled" sum="Untaxed and Unbilled Total"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_sale_order_form" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="amount_untaxed_unbilled" attrs="{'invisible':[('amount_untaxed_unbilled','=', 0)]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_sale_order_search" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <filter string="To Bil" name="to_billed" domain="[('amount_untaxed_unbilled', '&gt;', 0)]" />
+                    <filter string="Billed" name="billed" domain="[('amount_untaxed_unbilled', '=', 0)]" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
