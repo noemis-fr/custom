@@ -37,6 +37,18 @@ class product_product(Model):
             }
         return res
 
+    def _compute_total_standard_price(
+            self, cr, uid, ids, field_names=None, arg=False, context=None):
+        res = {}
+        for product in self.browse(cr, uid, ids, context=context):
+            res[product.id] = {
+                'total_standard_price':
+                    product.standard_price * product.stored_qty_available,
+                'total_standard_price_virtual':
+                    product.standard_price * product.stored_virtual_available,
+            }
+        return res
+
     # Recompute Section
     def _recompute_product_from_stock_move_change(
             self, cr, uid, ids, context=None):
@@ -59,4 +71,12 @@ class product_product(Model):
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'product_qty', 'type', 'state'], 10),
             }),
+        'total_standard_price': fields.function(
+            _compute_total_standard_price, type='float',
+            multi='total_standard_price',
+            string='Total Value'),
+        'total_standard_price_virtual': fields.function(
+            _compute_total_standard_price, type='float',
+            multi='total_standard_price',
+            string='Total Forcasted Value'),
     }

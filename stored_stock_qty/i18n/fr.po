@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* noemis_stored_stock_qty
+#	* stored_stock_qty
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 21:13+0000\n"
-"PO-Revision-Date: 2015-10-04 21:13+0000\n"
+"POT-Creation-Date: 2015-11-17 19:06+0000\n"
+"PO-Revision-Date: 2015-11-17 19:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,50 +15,98 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "FQ"
 msgstr "Q. prévue"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "FQ Value"
+msgstr "Q. prévue (valeur)"
+
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "Forcasted Quantity <= 0"
 msgstr "Quantité prévue <= 0"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "Forcasted Quantity > 0"
 msgstr "Quantité prévue > 0"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: field:product.product,stored_virtual_available:0
 msgid "Forecasted Quantity (Stored Field)"
 msgstr "Quantité prévue (Champ stocké)"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: code:_description:0
-#: model:ir.model,name:noemis_stored_stock_qty.model_product_product
+#: model:ir.model,name:stored_stock_qty.model_product_product
+#: view:product.product:0
 #, python-format
 msgid "Product"
 msgstr "Article"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
+#: model:ir.actions.act_window,name:stored_stock_qty.action_product_product_stock
+#: model:ir.ui.menu,name:stored_stock_qty.menu_product_product_stock
+msgid "Products (Stock)"
+msgstr "Articles (Stock)"
+
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "QOH"
 msgstr "Q. stock"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "QOH Value"
+msgstr "Q. stock (Valeur)"
+
+#. module: stored_stock_qty
 #: field:product.product,stored_qty_available:0
 msgid "Quantity On Hand (Stored Field)"
 msgstr "Quantité en stock (Champ stocké)"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "Quantity On Hand <= 0"
 msgstr "Quantité en stock <= 0"
 
-#. module: noemis_stored_stock_qty
+#. module: stored_stock_qty
 #: view:product.product:0
 msgid "Quantity On Hand > 0"
 msgstr "Quantité en stock > 0"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Available Quantity"
+msgstr "Quantité totale en stock"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Available Value"
+msgstr "Valorisation totale du stock"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+#: field:product.product,total_standard_price_virtual:0
+msgid "Total Forcasted Value"
+msgstr "Valorisation totale prévue"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Forecasted Quantity"
+msgstr "Quantité totale prévue"
+
+#. module: stored_stock_qty
+#: field:product.product,total_standard_price:0
+msgid "Total Value"
+msgstr "Valorisation totale"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
 

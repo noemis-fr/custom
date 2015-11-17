@@ -48,5 +48,7 @@ Copyright
     ],
     'data': [
         'views/view.xml',
+        'views/action.xml',
+        'views/menu.xml',
     ],
 }

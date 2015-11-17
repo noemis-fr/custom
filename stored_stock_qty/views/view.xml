@@ -27,14 +27,34 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="qty_available" position="after">
-                    <field name="stored_qty_available" string="QOH"/>
+                    <field name="stored_qty_available" string="QOH" sum="Total Available Quantity"/>
                 </field>
                 <field name="virtual_available" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="virtual_available" position="after">
-                    <field name="stored_virtual_available" string="FQ"/>
+                    <field name="stored_virtual_available" string="FQ" sum="Total Forecasted Quantity"/>
                 </field>
+            </field>
+        </record>
+
+        <record id="view_product_product_stock_tree" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Product">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="categ_id" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="uom_id" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="standard_price" invisible="1"/>
+                    <field name="stored_qty_available" string="QOH" sum="Total Available Quantity"/>
+                    <field name="total_standard_price" string="QOH Value" sum="Total Available Value"/>
+                    <field name="stored_virtual_available" string="FQ" sum="Total Forecasted Quantity"/>
+                    <field name="total_standard_price_virtual" string="FQ Value" sum="Total Forcasted Value"/>
+                    <field name="lst_price"/>
+                    <field name="company_id" groups="base.group_multi_company" invisible="1"/>
+                </tree>
             </field>
         </record>
 
