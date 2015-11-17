@@ -36,6 +36,9 @@
                 <field name="amount_total" position="after">
                     <field name="amount_untaxed_unbilled" attrs="{'invisible':[('amount_untaxed_unbilled','=', 0)]}"/>
                 </field>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
+                    <field name="amount_untaxed_unbilled"/>
+                 </xpath>
             </field>
         </record>
 
