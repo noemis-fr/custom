@@ -25,25 +25,19 @@ from openerp.osv import fields
 import openerp.addons.decimal_precision as dp
 
 
-class sale_order(Model):
-    _inherit = 'sale.order'
+class sale_order_line(Model):
+    _inherit = 'sale.order.line'
 
     # Compute Section
     def _compute_amount_untaxed_unbilled(
             self, cr, uid, ids, field_names=None, arg=False, context=None):
         res = {}
-        for order in self.browse(cr, uid, ids, context=context):
-            res[order.id] = 0
-            for line in order.order_line:
-                res[order.id] += line.amount_untaxed_unbilled
+        for order_line in self.browse(cr, uid, ids, context=context):
+            res[order_line.id] = order_line.price_subtotal
+            for invoice_line in order_line.invoice_lines:
+                if invoice_line.invoice_id.state not in ['draft', 'cancel']:
+                    res[order_line.id] -= invoice_line.price_subtotal
         return res
-
-    # Recompute Section
-    def _get_order_from_order_line(
-            self, cr, uid, ids, context=None):
-        order_ids = [x.order_id.id for x in self.browse(
-            cr, uid, ids, context=context)]
-        return list(set(order_ids))
 
     _columns = {
         'amount_untaxed_unbilled': fields.function(
