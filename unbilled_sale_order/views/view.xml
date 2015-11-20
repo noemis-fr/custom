@@ -34,10 +34,10 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <field name="amount_total" position="after">
-                    <field name="amount_untaxed_unbilled" attrs="{'invisible':[('amount_untaxed_unbilled','=', 0)]}"/>
+                    <field name="amount_untaxed_unbilled" attrs="{'invisible':[('amount_untaxed_unbilled','=', 0)]}" string="Unbilled Total"/>
                 </field>
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="after">
-                    <field name="amount_untaxed_unbilled"/>
+                    <field name="amount_untaxed_unbilled" string="Unbilled"/>
                  </xpath>
             </field>
         </record>

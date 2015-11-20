@@ -37,6 +37,7 @@ class sale_order_line(Model):
             for invoice_line in order_line.invoice_lines:
                 if invoice_line.invoice_id.state not in ['draft', 'cancel']:
                     res[order_line.id] -= invoice_line.price_subtotal
+            res[order_line.id] = max(res[order_line.id], 0)
         return res
 
     _columns = {
