@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="editable">bottom</attribute>
+                    <attribute name="attrs">{'readonly' : [('state', 'not in', ('draft','sent'))]}</attribute>
                 </xpath>
             </field>
         </record>
