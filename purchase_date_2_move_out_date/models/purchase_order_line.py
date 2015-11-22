@@ -19,11 +19,15 @@
 #
 ##############################################################################
 
+from datetime import datetime, timedelta
+
 from openerp.osv.orm import Model
 
 
 class PurchaseOrderLine(Model):
     _inherit = 'purchase.order.line'
+
+    _DELIVERY_DELAY_DAYS = 2
 
     def write(self, cr, uid, ids, vals, context=None):
         move_obj = self.pool['stock.move']
@@ -31,6 +35,10 @@ class PurchaseOrderLine(Model):
             cr, uid, ids, vals, context=context)
 
         if 'date_planned' in vals:
+            delivery_date = (
+                datetime.strptime(vals['date_planned'], "%Y-%m-%d")
+                + timedelta(days=self._DELIVERY_DELAY_DAYS)
+                ).strftime('%Y-%m-%d')
             for purchase_order_line in self.browse(
                     cr, uid, ids, context=context):
                 # Get 'in' Moves linked to the current Purchase Order Line
@@ -62,6 +70,6 @@ class PurchaseOrderLine(Model):
                                     move_out.state not in ['done', 'cancel']:
                                 move_obj.write(
                                     cr, uid, [move_out.id],
-                                    {'date_expected': vals['date_planned']},
+                                    {'date_expected': delivery_date},
                                     context=context)
         return res
