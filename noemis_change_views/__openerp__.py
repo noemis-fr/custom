@@ -10,7 +10,7 @@
     'depends': [
         'sale',
         'sale_order_title',
-        'e3z_lead_sale_ipbox', # puvr fields
+        'e3z_lead_sale_ipbox',
     ],
     'data': [
         'views/view.xml',
