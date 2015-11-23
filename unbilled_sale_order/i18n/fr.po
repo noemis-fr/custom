@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-16 00:17+0000\n"
-"PO-Revision-Date: 2015-11-16 00:17+0000\n"
+"POT-Creation-Date: 2015-11-23 22:31+0000\n"
+"PO-Revision-Date: 2015-11-23 22:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,12 +28,30 @@ msgid "Sales Order"
 msgstr "Commande de ventes"
 
 #. module: unbilled_sale_order
+#: code:_description:0
+#: model:ir.model,name:unbilled_sale_order.model_sale_order_line
+#, python-format
+msgid "Sales Order Line"
+msgstr "Ligne de commandes de vente"
+
+#. module: unbilled_sale_order
 #: view:sale.order:0
 msgid "To Bil"
 msgstr "A facturer"
 
 #. module: unbilled_sale_order
+#: view:sale.order:0
+msgid "Unbilled"
+msgstr "Non Facturé"
+
+#. module: unbilled_sale_order
+#: view:sale.order:0
+msgid "Unbilled Total"
+msgstr "Total Non Facturé"
+
+#. module: unbilled_sale_order
 #: field:sale.order,amount_untaxed_unbilled:0
+#: field:sale.order.line,amount_untaxed_unbilled:0
 msgid "Untaxed and Unbilled Amount"
 msgstr "Total HT Non facturé"
 
