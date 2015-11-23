@@ -9,6 +9,8 @@
     'license': 'AGPL-3',
     'depends': [
         'sale',
+        'sale_order_title',
+        'e3z_lead_sale_ipbox', # puvr fields
     ],
     'data': [
         'views/view.xml',
