@@ -76,5 +76,5 @@ class sale_order_line(Model):
         elif layout_type == 'title':
             res['value']['name'] = _('TITLE')
         elif layout_type == 'break':
-            re['value']['name'] = _('PAGE BREAK')
+            res['value']['name'] = _('PAGE BREAK')
         return res
