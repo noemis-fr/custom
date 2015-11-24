@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 23:24+0000\n"
-"PO-Revision-Date: 2015-11-23 23:24+0000\n"
+"POT-Creation-Date: 2015-11-24 10:26+0000\n"
+"PO-Revision-Date: 2015-11-24 10:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,28 +21,29 @@ msgid "Layout Type"
 msgstr "Type"
 
 #. module: sale_order_title
-#: selection:sale.order.line,layout_type:0
-msgid "Note"
-msgstr "R"
-
-#. module: sale_order_title
-#: code:addons/sale_order_title/models/sale_order_line.py:58
+#: code:addons/sale_order_title/models/sale_order_line.py:79
 #, python-format
 msgid "PAGE BREAK"
 msgstr "SAUT DE PAGE"
 
 #. module: sale_order_title
 #: selection:sale.order.line,layout_type:0
-msgid "Page Break"
-msgstr "SP"
+msgid "PB"
+msgstr "SdP"
+
+#. module: sale_order_title
+#: code:addons/sale_order_title/models/sale_order_line.py:75
+#, python-format
+msgid "REMARK"
+msgstr "REMARQUE"
 
 #. module: sale_order_title
 #: selection:sale.order.line,layout_type:0
-msgid "Product"
-msgstr "P"
+msgid "ST"
+msgstr "ST"
 
 #. module: sale_order_title
-#: code:addons/sale_order_title/models/sale_order_line.py:56
+#: code:addons/sale_order_title/models/sale_order_line.py:73
 #, python-format
 msgid "SUB TOTAL"
 msgstr "SOUS TOTAL"
@@ -55,17 +56,8 @@ msgid "Sales Order Line"
 msgstr "Ligne de commandes de vente"
 
 #. module: sale_order_title
-#: selection:sale.order.line,layout_type:0
-msgid "Sub Total"
-msgstr "ST"
-
-#. module: sale_order_title
-#: selection:sale.order.line,layout_type:0
-msgid "Title"
-msgstr "T"
-
-#. module: sale_order_title
-#: view:sale.order:0
-msgid "{'readonly': [('layout_type', '!=', 'article')]}"
-msgstr "{'readonly': [('layout_type', '!=', 'article')]}"
+#: code:addons/sale_order_title/models/sale_order_line.py:77
+#, python-format
+msgid "TITLE"
+msgstr "TITRE"
 

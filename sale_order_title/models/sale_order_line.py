@@ -28,11 +28,11 @@ class sale_order_line(Model):
     _inherit = 'sale.order.line'
 
     _LAYOUT_TYPE_SELECTION = [
-        ('article', 'Product'),
-        ('title', 'Title'),
-        ('text', 'Note'),
-        ('subtotal', 'Sub Total'),
-        ('break', 'Page Break'),
+        ('article', 'P'),
+        ('title', 'T'),
+        ('text', 'R'),
+        ('subtotal', 'ST'),
+        ('break', 'PB'),
     ]
 
     _columns = {
@@ -51,11 +51,10 @@ class sale_order_line(Model):
                 'product_id': False,
                 'price_unit': 0,
                 'product_uom_qty': 0,
+                'tax_id': False,
+                'price_unit': 0,
+                'discount': 0,
             }
-            if layout_type == 'subtotal':
-                vals['name'] = _('SUB TOTAL')
-            elif layout_type == 'break':
-                vals['name'] = _('PAGE BREAK')
         return vals
 
     def create(self, cr, uid, vals, context=None):
@@ -69,4 +68,13 @@ class sale_order_line(Model):
             cr, uid, ids, vals, context=context)
 
     def onchange_layout_type(self, cr, uid, ids, layout_type, context=None):
-        return {'value': self.layout_type_2_vals(layout_type)}
+        res = {'value': self.layout_type_2_vals(layout_type)}
+        if layout_type == 'subtotal':
+            res['value']['name'] = _('SUB TOTAL')
+        elif layout_type == 'text':
+            res['value']['name'] = _('REMARK')
+        elif layout_type == 'title':
+            res['value']['name'] = _('TITLE')
+        elif layout_type == 'break':
+            re['value']['name'] = _('PAGE BREAK')
+        return res

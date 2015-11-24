@@ -26,29 +26,30 @@
                 <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="before">
                     <field name="layout_type" on_change="onchange_layout_type(layout_type)"/>
                  </xpath>
-                <xpath expr="//tree/field[@name='discount']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='tax_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='product_uom']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='price_unit']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='product_uom_qty']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='product_id']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
-                <xpath expr="//tree/field[@name='price_subtotal']" position="attributes">
-                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>
-                </xpath>
             </field>
         </record>
 
     </data>
 </openerp>
+
+<!--                <xpath expr="//tree/field[@name='discount']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='tax_id']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='product_uom']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='price_unit']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='product_uom_qty']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='product_id']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='price_subtotal']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('layout_type', '!=', 'article')]}</attribute>-->
+<!--                </xpath>-->
