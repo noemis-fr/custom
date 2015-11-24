@@ -49,7 +49,6 @@ class sale_order_line(Model):
         if layout_type and layout_type != 'article':
             vals = {
                 'product_id': False,
-                'price_unit': 0,
                 'product_uom_qty': 0,
                 'tax_id': False,
                 'price_unit': 0,
