@@ -45,5 +45,5 @@ class sale_order(report_sxw.rml_parse):
 report_sxw.report_sxw(
     'report.report_noemis_sale_order_proforma',
     'sale.order',
-    'addons/noemis_change_print/report/report_noemis_sale_order_proforma.rml',
+    'addons/noemis_change_print/report/sale_order_proforma.rml',
     parser=sale_order, header='external')
