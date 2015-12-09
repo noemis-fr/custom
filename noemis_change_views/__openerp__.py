@@ -9,10 +9,14 @@
     'license': 'AGPL-3',
     'depends': [
         'sale',
+        'sale_margin',
         'sale_order_title',
         'e3z_lead_sale_ipbox',
     ],
     'data': [
         'views/view.xml',
+    ],
+    'css': [
+        'static/src/css/css.css',
     ],
 }
