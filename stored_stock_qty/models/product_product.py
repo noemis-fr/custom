@@ -27,6 +27,32 @@ class product_product(Model):
     _inherit = 'product.product'
 
     # Compute Section
+    def _compute_last_date(
+            self, cr, uid, ids, field_names=None, arg=False, context=None):
+        res = {
+            id: {'last_incoming_date': False, 'last_outgoing_date': False}
+            for id in ids}
+        move_obj = self.pool['stock.move']
+        for id in ids:
+            in_move_id = move_obj.search(cr, uid, [
+                ('product_id', '=', id),
+                ('type', '=', 'in'),
+                ('state', '=', 'done')], order='date desc', limit=1,
+                context=context)
+            out_move_id = move_obj.search(cr, uid, [
+                ('product_id', '=', id),
+                ('type', '=', 'out'),
+                ('state', '=', 'done')], order='date desc', limit=1,
+                context=context)
+            if in_move_id:
+                res[id]['last_incoming_date'] = move_obj.browse(
+                    cr, uid, in_move_id[0], context=context).date
+            if out_move_id:
+                res[id]['last_outgoing_date'] = move_obj.browse(
+                    cr, uid, out_move_id[0], context=context).date
+
+        return res
+
     def _compute_stored_qty(
             self, cr, uid, ids, field_names=None, arg=False, context=None):
         res = {}
@@ -59,6 +85,18 @@ class product_product(Model):
 
     # Column Section
     _columns = {
+        'last_incoming_date': fields.function(
+            _compute_last_date, string='Last Incoming Date',
+            type='datetime', multi='compute_last_date', store={
+                'stock.move': (_recompute_product_from_stock_move_change, [
+                    'product_id', 'type', 'state', 'date'], 10),
+            }),
+        'last_outgoing_date': fields.function(
+            _compute_last_date, string='Last Outgoing Date',
+            type='datetime', multi='compute_last_date', store={
+                'stock.move': (_recompute_product_from_stock_move_change, [
+                    'product_id', 'type', 'state', 'date'], 10),
+            }),
         'stored_qty_available': fields.function(
             _compute_stored_qty, string='Quantity On Hand (Stored Field)',
             type='float', multi='compute_stored_qty', store={

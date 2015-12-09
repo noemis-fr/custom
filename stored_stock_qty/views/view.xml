@@ -48,6 +48,8 @@
                     <field name="type" invisible="1"/>
                     <field name="uom_id" string="Unit of Measure" groups="product.group_uom"/>
                     <field name="standard_price" invisible="1"/>
+                    <field name="last_incoming_date"/>
+                    <field name="last_outgoing_date"/>
                     <field name="stored_qty_available" string="QOH" sum="Total Available Quantity"/>
                     <field name="total_standard_price" string="QOH Value" sum="Total Available Value"/>
                     <field name="stored_virtual_available" string="FQ" sum="Total Forecasted Quantity"/>
