@@ -57,8 +57,9 @@ class PurchaseOrderLine(Model):
                 # (We use 'origin' field, because user merge a lot of
                 # purchase order and order line. So, procurement information
                 # could be lost.
-                sale_order_names = purchase_order_line.order_id.origin
-                for item in sale_order_names.split(" "):
+                origin = purchase_order_line.order_id.origin
+                sale_order_names = origin and origin.split(" ") or []
+                for item in sale_order_names:
                     if str(item).startswith('SO'):
                         # Get 'Out' Moves
                         move_out_ids = move_obj.search(
