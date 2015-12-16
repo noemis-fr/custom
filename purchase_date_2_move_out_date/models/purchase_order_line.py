@@ -27,7 +27,7 @@ from openerp.osv.orm import Model
 class PurchaseOrderLine(Model):
     _inherit = 'purchase.order.line'
 
-    _DELIVERY_DELAY_DAYS = 2
+    _DELIVERY_DELAY_DAYS = 0
 
     def write(self, cr, uid, ids, vals, context=None):
         move_obj = self.pool['stock.move']
