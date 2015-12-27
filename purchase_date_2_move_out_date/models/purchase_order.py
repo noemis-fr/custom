@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    No Sale Warning module for Odoo
+#    Purchase Date to Move Out Date module for Odoo
 #    Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,11 +19,12 @@
 #
 ##############################################################################
 
+import datetime
 from openerp.osv import fields
 from openerp.osv.orm import Model
 
 
-class purchase_order(Model):
+class PurchaseOrder(Model):
     _inherit = 'purchase.order'
 
     # Remove readonly depending of state.
@@ -36,3 +37,17 @@ class purchase_order(Model):
     _defaults = {
         'minimum_planned_date': '2000-01-01',
     }
+
+    def write(self, cr, uid, ids, vals, context=None):
+        line_obj = self.pool['purchase.order.line']
+        res = super(PurchaseOrder, self).write(
+            cr, uid, ids, vals, context=context)
+        if vals.get('minimum_planned_date', False):
+            for order in self.browse(cr, uid, ids, context=context):
+                # We force to rewrite date_planned on each line to change date
+                # on stock moves
+                line_ids = [x.id for x in order.order_line]
+                line_obj.write(cr, uid, line_ids, {
+                    'date_planned': vals['minimum_planned_date']},
+                    context=context)
+        return res
