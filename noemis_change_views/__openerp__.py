@@ -14,7 +14,7 @@
         'e3z_lead_sale_ipbox',
     ],
     'data': [
-        'views/view.xml',
+        'views/sale_order_view.xml',
     ],
     'css': [
         'static/src/css/css.css',
