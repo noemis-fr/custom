@@ -32,3 +32,7 @@ class purchase_order(Model):
         'order_line': fields.one2many(
             'purchase.order.line', 'order_id', 'Order Lines'),
     }
+
+    _defaults = {
+        'minimum_planned_date': '2000-01-01',
+    }

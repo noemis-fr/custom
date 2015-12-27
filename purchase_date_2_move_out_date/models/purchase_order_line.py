@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    No Sale Warning module for Odoo
+#    Purchase Date to Move Out Date module for Odoo
 #    Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -28,6 +28,10 @@ class PurchaseOrderLine(Model):
     _inherit = 'purchase.order.line'
 
     _DELIVERY_DELAY_DAYS = 0
+
+    _defaults = {
+        'date_planned': '2000-01-01',
+    }
 
     def write(self, cr, uid, ids, vals, context=None):
         move_obj = self.pool['stock.move']
