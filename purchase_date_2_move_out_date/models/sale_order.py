@@ -19,7 +19,6 @@
 #
 ##############################################################################
 
-from openerp.osv import fields
 from openerp.osv.orm import Model
 
 
