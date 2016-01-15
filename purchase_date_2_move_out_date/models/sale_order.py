@@ -19,42 +19,13 @@
 #
 ##############################################################################
 
-{
-    'name': 'Purchase Date to Move Out Date',
-    'version': '1.0',
-    'category': 'Sale',
-    'description': """
-Change purchase Order Line Date impact Customer (out) Moves Date
-================================================================
-
-The aim of this module is to deal with floating picking in dates that impact
-picking out dates.
-
-* When a purchase order is validated, if the purchaser change dates on purchase
-  order line dates, it will changes the date of the associated forcast move in.
-
-Technical Information
----------------------
-
-* This module remove readonly features on purchase order line, when order is
-  confirmed. Use this feature with caution.
+from openerp.osv import fields
+from openerp.osv.orm import Model
 
 
-Copyright
----------
-* Noemis (http://www.noemis.fr)
+class SaleOrder(Model):
+    _inherit = 'sale.order'
 
-    """,
-    'author': 'Sylvain LE GAL',
-    'website': 'http://www.noemis.fr',
-    'license': 'AGPL-3',
-    'depends': [
-        'purchase',
-        'stock',
-        'sale',
-        'sale_order_dates',
-    ],
-    'data': [
-        'views/picking_view.xml',
-    ],
-}
+    _defaults = {
+        'requested_date': '2000-01-01',
+    }
