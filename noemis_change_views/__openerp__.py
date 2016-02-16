@@ -11,6 +11,7 @@
         'sale',
         'sale_margin',
         'sale_order_title',
+        'sale_order_dates',
         'e3z_lead_sale_ipbox',
     ],
     'data': [

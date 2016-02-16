@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<openerp><data>
 
-        <record id="view_sale_order_form" model="ir.ui.view">
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form_editable_list"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                    <attribute name="editable">bottom</attribute>
-                </xpath>
-                <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                    <attribute name="class">noemis_change_views__view_sale_order_form</attribute>
-                    <attribute name="version">7.0</attribute>
-                </xpath>
+    <record id="view_sale_order_tree_quotation" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_order_dates.view_quotation_tree_date"/>
+        <field name="arch" type="xml">
+            <field name="commitment_date" position="attributes">
+                <attribute name="invisible">1</attribute>
             </field>
-        </record>
-
-        <record id="view_sale_order_form_margin" model="ir.ui.view">
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="attributes">
-                    <attribute name="string">Purchase Price</attribute>
-                </xpath>
+            <field name="requested_date" position="attributes">
+                <attribute name="invisible">1</attribute>
             </field>
-        </record>
+        </field>
+    </record>
 
-    </data>
-</openerp>
+    <record id="view_sale_order_tree_order" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_order_dates.view_order_tree_date"/>
+        <field name="arch" type="xml">
+            <field name="commitment_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="requested_date" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form_editable_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="class">noemis_change_views__view_sale_order_form</attribute>
+                <attribute name="version">7.0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_order_form_margin" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_margin.sale_margin_sale_order_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="attributes">
+                <attribute name="string">Purchase Price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</data></openerp>
