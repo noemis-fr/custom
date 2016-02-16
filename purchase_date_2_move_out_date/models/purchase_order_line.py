@@ -40,8 +40,8 @@ class PurchaseOrderLine(Model):
 
         if 'date_planned' in vals:
             delivery_date = (
-                datetime.strptime(vals['date_planned'], "%Y-%m-%d")
-                + timedelta(days=self._DELIVERY_DELAY_DAYS)
+                datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
+                timedelta(days=self._DELIVERY_DELAY_DAYS)
                 ).strftime('%Y-%m-%d')
             for purchase_order_line in self.browse(
                     cr, uid, ids, context=context):
