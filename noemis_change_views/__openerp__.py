@@ -18,6 +18,7 @@
     'data': [
         'views/purchase_order_view.xml',
         'views/sale_order_view.xml',
+        'views/account_invoice_view.xml',
     ],
     'css': [
         'static/src/css/css.css',
