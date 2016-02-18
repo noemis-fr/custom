@@ -4,7 +4,6 @@
 .openerp .oe_form_editable .oe_form .oe_form_field_date input {width: 110px;} /* initial value 100px */ 
 
 /* sale_order - view_pos_order_form                                        */
-
 .noemis_change_views__view_sale_order_form [data-id="sequence"]                 {width: 02%;} /* Sequence (hand) */
 .noemis_change_views__view_sale_order_form [data-id="layout_type"]              {width: 04%;} /* Type */
 .noemis_change_views__view_sale_order_form [data-id="product_id"]               {width: 12%;} /* Ref */
@@ -12,7 +11,6 @@
 .noemis_change_views__view_sale_order_form [data-id="product_uom_qty"]          {width: 06%;} /* Quantité */
 .noemis_change_views__view_sale_order_form [data-id="tax_id"]                   {width: 05%;} /* TVA */
 .noemis_change_views__view_sale_order_form [data-id="purchase_price"]           {width: 08%;} /* Prix d'achat */
-/*FUCK*/
 .noemis_change_views__view_sale_order_form [data-id="qty_display"]              {width: 04%;} /* QS / QRD */
 .noemis_change_views__view_sale_order_form [data-id="price_unit"]               {width: 08%;} /* PVU */
 .noemis_change_views__view_sale_order_form [data-id="discount"]                 {width: 05%;} /* REM */
@@ -20,4 +18,15 @@
 .noemis_change_views__view_sale_order_form [data-id="amount_untaxed_unbilled"]  {width: 08%;} /* Non Facturé */
 .noemis_change_views__view_sale_order_form [data-id="margin_display"]           {width: 08%;} /* Marge */
 
+/* web_dashboard_tile */
+.openerp .oe_kanban_view .oe_dashbaord_tile{
+    width: 200px;
+    height: 120px;
+}
+.openerp .oe_kanban_view .oe_dashbaord_tile .tile_count_without_computed_value{
+    font-size: 45px;
+}
 
+.openerp .oe_kanban_view .oe_dashbaord_tile .tile_count_with_computed_value{
+    font-size: 20px;
+}
