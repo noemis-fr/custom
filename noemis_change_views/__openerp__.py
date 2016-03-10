@@ -8,6 +8,7 @@
     'website': 'http://www.noemis.fr',
     'license': 'AGPL-3',
     'depends': [
+        'purchase',
         'sale',
         'sale_margin',
         'sale_order_title',
