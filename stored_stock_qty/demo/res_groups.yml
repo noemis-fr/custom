@@ -19,39 +19,10 @@
 #
 ##############################################################################
 
-{
-    'name': 'Stored Stock Quantity',
-    'version': '1.0',
-    'category': 'Stock',
-    'description': """
-Compute and store in Database Stock value
-=========================================
+- !record {model: res.groups, id: base.group_no_one}:
+    users:
+        - base.user_root
 
-* Adds 2 new fields on 'product.product' models 'stored_qty_available' and
-  'stored_virtual_available'.
-  That two fields are based on non stored according fields.
-
-* Allows to reorder product by qty in a tree view.
-
-* Adds two filters, quantity > 0 and quantity <= 0
-
-Copyright
----------
-* Noemis (http://www.noemis.fr)
-
-    """,
-    'author': 'Sylvain LE GAL',
-    'website': 'http://www.noemis.fr',
-    'license': 'AGPL-3',
-    'depends': [
-        'stock',
-    ],
-    'data': [
-        'views/view_product_product.xml',
-        'views/action.xml',
-        'views/menu.xml',
-    ],
-    'demo': [
-        'demo/res_groups.yml',
-    ],
-}
+- !record {model: res.groups, id: stock.group_locations}:
+    users:
+        - base.user_root

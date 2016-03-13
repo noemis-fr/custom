@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 22:33+0000\n"
-"PO-Revision-Date: 2015-11-23 22:33+0000\n"
+"POT-Creation-Date: 2016-03-13 17:50+0000\n"
+"PO-Revision-Date: 2016-03-13 17:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stored_stock_qty
-#: view:product.product:0
-msgid "FQ"
-msgstr "Q. prévue"
+#: field:product.product,last_incoming_date:0
+msgid "Last Global Incoming Date"
+msgstr "Date de dernière entrée"
 
 #. module: stored_stock_qty
-#: view:product.product:0
-msgid "FQ Value"
-msgstr "Q. prévue (valeur)"
-
-#. module: stored_stock_qty
-#: view:product.product:0
-msgid "Forcasted Quantity <= 0"
-msgstr "Quantité prévue <= 0"
-
-#. module: stored_stock_qty
-#: view:product.product:0
-msgid "Forcasted Quantity > 0"
-msgstr "Quantité prévue > 0"
-
-#. module: stored_stock_qty
-#: field:product.product,stored_virtual_available:0
-msgid "Forecasted Quantity (Stored Field)"
-msgstr "Quantité prévue (Champ stocké)"
+#: field:product.product,last_outgoing_date:0
+msgid "Last Global Outgoing Date"
+msgstr "Date de dernière sortie"
 
 #. module: stored_stock_qty
 #: code:_description:0
@@ -56,31 +41,6 @@ msgstr "Articles (Stock)"
 
 #. module: stored_stock_qty
 #: view:product.product:0
-msgid "QOH"
-msgstr "Q. stock"
-
-#. module: stored_stock_qty
-#: view:product.product:0
-msgid "QOH Value"
-msgstr "Q. stock (Valeur)"
-
-#. module: stored_stock_qty
-#: field:product.product,stored_qty_available:0
-msgid "Quantity On Hand (Stored Field)"
-msgstr "Quantité en stock (Champ stocké)"
-
-#. module: stored_stock_qty
-#: view:product.product:0
-msgid "Quantity On Hand <= 0"
-msgstr "Quantité en stock <= 0"
-
-#. module: stored_stock_qty
-#: view:product.product:0
-msgid "Quantity On Hand > 0"
-msgstr "Quantité en stock > 0"
-
-#. module: stored_stock_qty
-#: view:product.product:0
 msgid "Total Available Quantity"
 msgstr "Quantité totale en stock"
 
@@ -91,14 +51,64 @@ msgstr "Valorisation totale du stock"
 
 #. module: stored_stock_qty
 #: view:product.product:0
+msgid "Total FQ"
+msgstr "S. prévisionnel total"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total FQ Value"
+msgstr "S. prévisionnel total (Val.)"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Forcasted Quantity <= 0"
+msgstr "Stock prévisionnel total <= 0"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Forcasted Quantity > 0"
+msgstr "Stock prévisionnel total > 0"
+
+#. module: stored_stock_qty
+#: view:product.product:0
 #: field:product.product,total_standard_price_virtual:0
 msgid "Total Forcasted Value"
-msgstr "Valorisation totale prévue"
+msgstr "Valorisation du stock prévisionnel totale "
 
 #. module: stored_stock_qty
 #: view:product.product:0
 msgid "Total Forecasted Quantity"
-msgstr "Quantité totale prévue"
+msgstr "Stock prévisionnel total"
+
+#. module: stored_stock_qty
+#: field:product.product,stored_virtual_available:0
+msgid "Total Forecasted Quantity (Stored Field)"
+msgstr "Stock prévisionnel total (Champ stocké)"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total QOH"
+msgstr "Q. totale en stock"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total QOH Value"
+msgstr "Q. totale en stock (Val.)"
+
+#. module: stored_stock_qty
+#: field:product.product,stored_qty_available:0
+msgid "Total Quantity On Hand (Stored Field)"
+msgstr "Quantité totale en stock (Champ stocké)"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Quantity On Hand <= 0"
+msgstr "Quantité totale en stock <= 0"
+
+#. module: stored_stock_qty
+#: view:product.product:0
+msgid "Total Quantity On Hand > 0"
+msgstr "Quantité totale en stock > 0"
 
 #. module: stored_stock_qty
 #: field:product.product,total_standard_price:0

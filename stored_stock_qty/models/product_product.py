@@ -86,26 +86,28 @@ class product_product(Model):
     # Column Section
     _columns = {
         'last_incoming_date': fields.function(
-            _compute_last_date, string='Last Incoming Date',
+            _compute_last_date, string='Last Global Incoming Date',
             type='datetime', multi='compute_last_date', store={
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'type', 'state', 'date'], 10),
             }),
         'last_outgoing_date': fields.function(
-            _compute_last_date, string='Last Outgoing Date',
+            _compute_last_date, string='Last Global Outgoing Date',
             type='datetime', multi='compute_last_date', store={
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'type', 'state', 'date'], 10),
             }),
         'stored_qty_available': fields.function(
-            _compute_stored_qty, string='Quantity On Hand (Stored Field)',
-            type='float', multi='compute_stored_qty', store={
+            _compute_stored_qty, type='float',
+            string='Total Quantity On Hand (Stored Field)',
+            multi='compute_stored_qty', store={
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'product_qty', 'type', 'state'], 10),
             }),
         'stored_virtual_available': fields.function(
-            _compute_stored_qty, string='Forecasted Quantity (Stored Field)',
-            type='float', multi='compute_stored_qty', store={
+            _compute_stored_qty, type='float',
+            string='Total Forecasted Quantity (Stored Field)',
+            multi='compute_stored_qty', store={
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'product_qty', 'type', 'state'], 10),
             }),

@@ -24,16 +24,16 @@
             <field name="inherit_id" ref="product.product_product_tree_view" />
             <field name="arch" type="xml">
                 <field name="qty_available" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="invisible">not context.get('location', False)</attribute>
                 </field>
                 <field name="qty_available" position="after">
-                    <field name="stored_qty_available" string="QOH" sum="Total Available Quantity"/>
+                    <field name="stored_qty_available" string="Total QOH" sum="Total Available Quantity"/>
                 </field>
                 <field name="virtual_available" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="invisible">not context.get('location', False)</attribute>
                 </field>
                 <field name="virtual_available" position="after">
-                    <field name="stored_virtual_available" string="FQ" sum="Total Forecasted Quantity"/>
+                    <field name="stored_virtual_available" string="Total FQ" sum="Total Forecasted Quantity"/>
                 </field>
             </field>
         </record>
@@ -50,10 +50,10 @@
                     <field name="standard_price" invisible="1"/>
                     <field name="last_incoming_date"/>
                     <field name="last_outgoing_date"/>
-                    <field name="stored_qty_available" string="QOH" sum="Total Available Quantity"/>
-                    <field name="total_standard_price" string="QOH Value" sum="Total Available Value"/>
-                    <field name="stored_virtual_available" string="FQ" sum="Total Forecasted Quantity"/>
-                    <field name="total_standard_price_virtual" string="FQ Value" sum="Total Forcasted Value"/>
+                    <field name="stored_qty_available" string="Total QOH" sum="Total Available Quantity"/>
+                    <field name="total_standard_price" string="Total QOH Value" sum="Total Available Value"/>
+                    <field name="stored_virtual_available" string="Total FQ" sum="Total Forecasted Quantity"/>
+                    <field name="total_standard_price_virtual" string="Total FQ Value" sum="Total Forcasted Value"/>
                     <field name="lst_price"/>
                     <field name="company_id" groups="base.group_multi_company" invisible="1"/>
                 </tree>
@@ -65,11 +65,11 @@
             <field name="inherit_id" ref="product.product_search_form_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <filter string="Quantity On Hand &gt; 0" name="qty_available_positive" domain="[('stored_qty_available', '&gt;', 0)]" />
-                    <filter string="Quantity On Hand &lt;= 0" name="qty_available_negative" domain="[('stored_qty_available', '&lt;=', 0)]" />
+                    <filter string="Total Quantity On Hand &gt; 0" name="qty_available_positive" domain="[('stored_qty_available', '&gt;', 0)]" />
+                    <filter string="Total Quantity On Hand &lt;= 0" name="qty_available_negative" domain="[('stored_qty_available', '&lt;=', 0)]" />
                     <separator/>
-                    <filter string="Forcasted Quantity &gt; 0" name="virtual_available_positive" domain="[('stored_virtual_available', '&gt;', 0)]" />
-                    <filter string="Forcasted Quantity &lt;= 0" name="virtual_available_negative" domain="[('stored_virtual_available', '&lt;=', 0)]" />
+                    <filter string="Total Forcasted Quantity &gt; 0" name="virtual_available_positive" domain="[('stored_virtual_available', '&gt;', 0)]" />
+                    <filter string="Total Forcasted Quantity &lt;= 0" name="virtual_available_negative" domain="[('stored_virtual_available', '&lt;=', 0)]" />
                     <separator/>
                 </field>
             </field>
