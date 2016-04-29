@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ -->
+<openerp><data>
+
+
+    <record id="view_stock_move_tree" model="ir.ui.view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_tree" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="sale_unit_price_vat_excl"/>
+             </field>
+            <field name="state" position="before">
+                <field name="sale_amount_total_vat_excl"/>
+             </field>
+        </field>
+    </record>
+
+</data></openerp>
