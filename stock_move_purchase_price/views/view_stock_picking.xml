@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ -->
+<openerp><data>
+
+    <record id="view_stock_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="stock_journal_id" position="after">
+                <field name="purchase_amount_total_vat_excl"/>
+             </field>
+        </field>
+    </record>
+
+    <record id="view_stock_picking_in_form" model="ir.ui.view">
+        <field name="model">stock.picking.in</field>
+        <field name="inherit_id" ref="stock.view_picking_in_form" />
+        <field name="arch" type="xml">
+            <field name="stock_journal_id" position="after">
+                <field name="purchase_amount_total_vat_excl"/>
+             </field>
+        </field>
+    </record>
+
+    <record id="view_stock_picking_tree" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="stock_journal_id" position="after">
+                <field name="purchase_amount_total_vat_excl"/>
+             </field>
+        </field>
+    </record>
+
+    <record id="view_stock_picking_in_tree" model="ir.ui.view">
+        <field name="model">stock.picking.in</field>
+        <field name="inherit_id" ref="stock.view_picking_in_tree" />
+        <field name="arch" type="xml">
+            <field name="stock_journal_id" position="after">
+                <field name="purchase_amount_total_vat_excl"/>
+             </field>
+        </field>
+    </record>
+
+</data></openerp>
