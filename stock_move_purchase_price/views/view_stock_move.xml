@@ -15,7 +15,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="purchase_unit_price_vat_excl"/>
              </field>
             <field name="state" position="before">
-                <field name="purchase_amount_total_vat_excl"/>
+                <field name="purchase_amount_total_vat_excl" sum="Total"/>
              </field>
         </field>
     </record>

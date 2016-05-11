@@ -31,7 +31,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="stock.vpicktree" />
         <field name="arch" type="xml">
             <field name="stock_journal_id" position="after">
-                <field name="purchase_amount_total_vat_excl"/>
+                <field name="purchase_amount_total_vat_excl" sum="Total"/>
              </field>
         </field>
     </record>
@@ -41,7 +41,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="stock.view_picking_in_tree" />
         <field name="arch" type="xml">
             <field name="stock_journal_id" position="after">
-                <field name="purchase_amount_total_vat_excl"/>
+                <field name="purchase_amount_total_vat_excl" sum="Total"/>
              </field>
         </field>
     </record>
