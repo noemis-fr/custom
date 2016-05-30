@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp><data>
+
+        <record id="account_invoice_line_search" model="ir.ui.view">
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="e3z_account_invoice_line.view_invoice_line_customer_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="tag_ids" string="Tags" filter_domain="[('tag_ids','ilike',self)]"/>
+                </field>
+            </field>
+        </record>
+
+</data></openerp>
