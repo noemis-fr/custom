@@ -69,9 +69,9 @@ class product_product(Model):
         for product in self.browse(cr, uid, ids, context=context):
             res[product.id] = {
                 'total_standard_price':
-                    product.standard_price * product.stored_qty_available,
+                product.standard_price * product.stored_qty_available,
                 'total_standard_price_virtual':
-                    product.standard_price * product.stored_virtual_available,
+                product.standard_price * product.stored_virtual_available,
             }
         return res
 
