@@ -64,7 +64,7 @@ class PurchaseOrderLine(Model):
                 origin = purchase_order_line.order_id.origin
                 sale_order_names = origin and origin.split(" ") or []
                 for item in sale_order_names:
-                    if str(item).startswith('SO'):
+                    if item and item.startswith('SO'):
                         # Get 'Out' Moves
                         move_out_ids = move_obj.search(
                             cr, uid, [('origin', '=', item)], context=context)
