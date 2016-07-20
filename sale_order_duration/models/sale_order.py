@@ -35,16 +35,15 @@ class SaleOrder(Model):
         current_date = fields.date.context_today(
             self, cr, uid, context=context)
         for order in self.browse(cr, uid, ids, context=context):
-            if order.shipped == True and not order.date_end:
+            if order.shipped and order.date_begin and not order.date_end:
                 date_begin = datetime.strptime(
                     order.date_begin, DEFAULT_SERVER_DATE_FORMAT)
                 date_end = datetime.strptime(
                     current_date, DEFAULT_SERVER_DATE_FORMAT)
-                if order.date_begin:
-                    res[order.id] = {
-                        'date_end': current_date,
-                        'duration': (date_end - date_begin).days,
-                    }
+                res[order.id] = {
+                    'date_end': current_date,
+                    'duration': (date_end - date_begin).days,
+                }
             if order.state == 'progress' and not order.date_begin:
                     res[order.id] = {
                         'date_begin': current_date,

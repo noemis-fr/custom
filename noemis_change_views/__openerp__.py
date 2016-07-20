@@ -17,9 +17,10 @@
         'web_dashboard_tile',
     ],
     'data': [
-        'views/purchase_order_view.xml',
-        'views/sale_order_view.xml',
-        'views/account_invoice_view.xml',
+        'views/view_stock_picking.xml',
+        'views/view_purchase_order.xml',
+        'views/view_sale_order.xml',
+        'views/view_account_invoice.xml',
     ],
     'css': [
         'static/src/css/css.css',
