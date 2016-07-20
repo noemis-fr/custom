@@ -35,7 +35,7 @@ class SaleOrder(Model):
         current_date = fields.date.context_today(
             self, cr, uid, context=context)
         for order in self.browse(cr, uid, ids, context=context):
-            if order.state == 'done':
+            if order.shipped == True and not order.date_end:
                 date_begin = datetime.strptime(
                     order.date_begin, DEFAULT_SERVER_DATE_FORMAT)
                 date_end = datetime.strptime(
@@ -45,7 +45,7 @@ class SaleOrder(Model):
                         'date_end': current_date,
                         'duration': (date_end - date_begin).days,
                     }
-            if order.state == 'progress':
+            if order.state == 'progress' and not order.date_begin:
                     res[order.id] = {
                         'date_begin': current_date,
                         'date_end': False,
@@ -65,8 +65,8 @@ class SaleOrder(Model):
             _compute_duration, string='End Date', type='date',
             multi='duration', store={
                 'sale.order': (lambda self, cr, uid, ids, context: ids, [
-                    'state'], 5)},
-            help="Date when the Sale Order is done."),
+                    'shipped'], 5)},
+            help="Date when the Sale Order is shipped."),
         'duration': fields.function(
             _compute_duration, string='Duration', type='integer',
             multi='duration', store={

@@ -31,7 +31,7 @@ The module extends sale functionnalities, adding two new dates fields on
 sale order:
 
 * begin Date, when the order is validated
-* End Date, when the order is done
+* End Date, when the order is shipped
 
 An extra computed duration field is available, that is the difference
 between the two dates.
