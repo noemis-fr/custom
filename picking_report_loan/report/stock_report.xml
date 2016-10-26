@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <report id="report_picking_loan_list" model="stock.picking.loan" name="stock.picking.loan" string="Loan Picking" rml="picking_report_loan/report/picking.rml"/>
+        <report id="report_picking_loan_list" model="stock.picking" name="stock.picking.loan" string="Loan Picking" rml="picking_report_loan/report/picking.rml"/>
         
     </data>
 </openerp>
