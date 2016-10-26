@@ -30,15 +30,13 @@ class picking(report_sxw.rml_parse):
             'time': time,
             'get_product_desc': self.get_product_desc,
         })
-        print("M&GO internal %s" % self)
+
     def get_product_desc(self, move_line):
         desc = move_line.product_id.name
         if move_line.product_id.default_code:
             desc = '[' + move_line.product_id.default_code + ']' + ' ' + desc
         return desc
 
-#for suffix in ['', '.in', '.out', '.loan']:
-#    print("SUFFIX %s" % suffix)
 report_sxw.report_sxw('report.stock.picking.loan',
                           'stock.picking',
                           'addons/picking_report_loan/report/picking.rml',
