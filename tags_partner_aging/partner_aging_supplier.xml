@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Supplier Aging search/filters -->
+        <record model="ir.ui.view" id="view_supplier_aging_search">
+            <field name="name">supplier.aging.search</field>
+            <field name="model">partner.aging.supplier</field>
+            <field name="inherit_id" ref="partner_aging.view_supplier_aging_search"></field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+	
+	
+                <field name="partner_id" position="after">
+                    <field name="category_id" />    
+                </field>
+            </field>
+        </record>
+    
+    
+    </data>
+</openerp>

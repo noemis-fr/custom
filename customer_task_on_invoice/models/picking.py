@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Sale Order Title module for Odoo
+#    No Sale Warning module for Odoo
 #    Copyright (C) 2015-Today Noemis (http://www.noemis.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,31 +19,38 @@
 #
 ##############################################################################
 
-{
-    'name': 'Customer Task On invoice',
-    'version': '1.0',
-    'category': 'Sale',
-    'description': """
-Use the task fields on partner to display additionnal info on invoices
-======================================
+from openerp.osv import fields
+from openerp.osv.orm import Model
+from openerp.tools.translate import _
 
 
+class StockPicking(Model):
+    _inherit = 'stock.picking'
 
-Copyright
----------
-* Noemis (http://www.noemis.fr)
+    
 
-    """,
-    'author': 'Florent THOMAS',
-    'website': 'http://www.noemis.fr',
-    'license': 'AGPL-3',
-    'depends': [
-        'sale','stock'
-    ],
-    'data': [
-        'views/invoice.xml',
-        'views/picking.xml',
-    ],
-    'demo': [
-    ],
-}
+    _columns = {
+        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+    }
+
+    
+class StockPickingIn(Model):
+    _inherit = 'stock.picking.in'
+
+    
+
+    _columns = {
+        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+    }
+
+    
+class StockPickingOut(Model):
+    _inherit = 'stock.picking.out'
+
+    
+
+    _columns = {
+        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+    }
+
+    
