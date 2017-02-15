@@ -44,7 +44,7 @@ Copyright
     'website': 'http://www.noemis.fr',
     'license': 'AGPL-3',
     'depends': [
-        'stock', 'e3z_lead_sale_ipbox'
+        'product','stock', 'e3z_lead_sale_ipbox'
     ],
     'data': [
         'views/view_product_product.xml',
