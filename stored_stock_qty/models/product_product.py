@@ -57,9 +57,12 @@ class product_product(Model):
             self, cr, uid, ids, field_names=None, arg=False, context=None):
         res = {}
         for product in self.browse(cr, uid, ids, context=context):
+            qt = float(product.qty_available) + float(product.outgoing_qty)
+            print("QT %s" % qt)
             res[product.id] = {
                 'stored_qty_available': product.qty_available,
                 'stored_virtual_available': product.virtual_available,
+                'stored_intermediate_stock':  qt if qt > 0.0 else 0.0
             }
         return res
 
@@ -107,6 +110,12 @@ class product_product(Model):
         'stored_virtual_available': fields.function(
             _compute_stored_qty, type='float',
             string='Total Forecasted Quantity (Stored Field)',
+            multi='compute_stored_qty', store={
+                'stock.move': (_recompute_product_from_stock_move_change, [
+                    'product_id', 'product_qty', 'type', 'state'], 10),
+            }),
+        'stored_intermediate_stock': fields.function(_compute_stored_qty, 
+            type='float', string='Intermediate Quantity',
             multi='compute_stored_qty', store={
                 'stock.move': (_recompute_product_from_stock_move_change, [
                     'product_id', 'product_qty', 'type', 'state'], 10),

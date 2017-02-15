@@ -59,6 +59,60 @@
                 </tree>
             </field>
         </record>
+        
+        
+         <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="outgoing_qty" position="after">
+                    <field name="stored_intermediate_stock"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_order_form_lead" model="ir.ui.view">
+            <field name="name">sale.order.from.lead</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="e3z_lead_sale_ipbox.view_order_form_lead"/>
+            <field name="arch" type="xml">                
+                <field name="qty_display" position="attributes">
+                    <attribute name="string">QS / QSD / QT</attribute>
+                </field>
+                
+            </field>
+        </record>
+
+        <record id="product_product_tree_view" model="ir.ui.view">
+            <field name="name">product.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="virtual_available" position="after">
+                    <field name="stored_intermediate_stock" sum="Total QT" />
+              
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="product_product_kanban">
+            <field name="name">Product Product Stock Kanban</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='tags']//ul//li[3]" position="after">
+                     <li t-if="record.type.raw_value != 'service'">QT: <field name="stored_intermediate_stock"/> 
+                        <field name="uom_id"/>
+                    </li>
+                </xpath>
+<!--                <ul position="inside">
+                    <li t-if="record.type.raw_value != 'service'">QT: <field name="stored_intermediate_stock"/> 
+                        <field name="uom_id"/>
+                    </li>
+                    
+                </ul>-->
+            </field>
+        </record>
 
         <record id="view_product_product_search" model="ir.ui.view">
             <field name="model">product.product</field>
