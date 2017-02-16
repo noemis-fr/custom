@@ -101,12 +101,12 @@
                 </field>
             </field>
         </record>
-        
+<!--        
         <record model="ir.ui.view" id="product_product_kanban">
             <field name="name">Product Product Stock Kanban</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
-            <!--<field name="inherit_id" ref="product.product_kanban_view"/>-->
+            <field name="inherit_id" ref="product.product_kanban_view"/>
             <field name="priority" eval="100" />
             <field name="arch" type="xml">
                 
@@ -115,10 +115,10 @@
                 <xpath expr="//div[@name='tags']//ul//li[2]" position="replace"/>
                 
                 
-<!--                <li t-if="record.type.raw_value != 'service'">On hand: <field name="qty_available"/> <field name="uom_id"/></li>
+                <li t-if="record.type.raw_value != 'service'">On hand: <field name="qty_available"/> <field name="uom_id"/></li>
                     <li t-if="record.type.raw_value != 'service'">Forecasted: <field name="virtual_available"/> <field name="uom_id"/></li>
                 
-                -->
+                
                 <xpath expr="//div[@name='tags']//ul//li[1]" position="after">
                     <li t-if="record.type.raw_value != 'service'">QS : <field name="qty_available"/> <field name="uom_id"/></li>
                     
@@ -127,14 +127,14 @@
                      <li t-if="record.type.raw_value != 'service'">QT : <field name="virtual_available"/> <field name="uom_id"/></li>
                         
                 </xpath>
-<!--                <ul position="inside">
+                <ul position="inside">
                     <li t-if="record.type.raw_value != 'service'">QT: <field name="stored_intermediate_stock"/> 
                         <field name="uom_id"/>
                     </li>
                     
-                </ul>-->
+                </ul>
             </field>
-        </record>
+        </record>-->
 
         <record id="view_product_product_search" model="ir.ui.view">
             <field name="model">product.product</field>
