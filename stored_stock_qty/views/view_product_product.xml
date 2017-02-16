@@ -105,7 +105,9 @@
         <record model="ir.ui.view" id="product_product_kanban">
             <field name="name">Product Product Stock Kanban</field>
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
+            <!--<field name="inherit_id" ref="stock.product_kanban_stock_view"/>-->
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="priority" eval="100" />
             <field name="arch" type="xml">
                 
                 
