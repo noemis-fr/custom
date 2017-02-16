@@ -67,8 +67,13 @@
             <field name="priority" eval="100" />
             
             <field name="arch" type="xml">
+                
+                <field name="virtual_available" position="attributes">
+                    <attribute name="string">Qté Prévue (QT)</attribute>                    
+                </field>
+                
                 <field name="outgoing_qty" position="after">
-                    <field name="stored_intermediate_stock"/>
+                    <field name="stored_intermediate_stock" string="Qté disponible (QSD)"/>
                 </field>
             </field>
         </record>
@@ -90,8 +95,8 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
-                <field name="virtual_available" position="after">
-                    <field name="stored_intermediate_stock" sum="Total QT" />
+                <field name="virtual_available" position="before">
+                    <field name="stored_intermediate_stock" sum="Total (QSD)" />
               
                 </field>
             </field>
@@ -102,10 +107,23 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="stock.product_kanban_stock_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@name='tags']//ul//li[3]" position="after">
-                     <li t-if="record.type.raw_value != 'service'">QT: <field name="stored_intermediate_stock"/> 
-                        <field name="uom_id"/>
+                
+                
+                <xpath expr="//div[@name='tags']//ul//li[3]" position="replace"/>
+                <xpath expr="//div[@name='tags']//ul//li[2]" position="replace"/>
+                
+                
+<!--                <li t-if="record.type.raw_value != 'service'">On hand: <field name="qty_available"/> <field name="uom_id"/></li>
+                    <li t-if="record.type.raw_value != 'service'">Forecasted: <field name="virtual_available"/> <field name="uom_id"/></li>
+                
+                -->
+                <xpath expr="//div[@name='tags']//ul//li[1]" position="after">
+                    <li t-if="record.type.raw_value != 'service'">QS : <field name="qty_available"/> <field name="uom_id"/></li>
+                    
+                     <li t-if="record.type.raw_value != 'service'">QSD : <field name="stored_intermediate_stock"/> <field name="uom_id"/>
                     </li>
+                     <li t-if="record.type.raw_value != 'service'">QT : <field name="virtual_available"/> <field name="uom_id"/></li>
+                        
                 </xpath>
 <!--                <ul position="inside">
                     <li t-if="record.type.raw_value != 'service'">QT: <field name="stored_intermediate_stock"/> 
