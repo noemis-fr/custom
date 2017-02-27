@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © <YEAR(S)> <AUTHOR(S)>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+
+        <record id="sale_order_list_product_select" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <!-- My view modifications -->
+        
+                <field name="name" position="after">
+                    <field name="order_line" string="Product in line" filter_domain="[('order_line.product_id.default_code','ilike',self)]"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
