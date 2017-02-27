@@ -42,7 +42,7 @@ class sale_order_line(Model):
                 stock_virtual = self.pool.get('product.product').get_product_available(cr, uid, [line.product_id.id], context=context)
                 context.update({ 'states': ('done',), 'what': ('in', 'out') })
                 stock_available = self.pool.get('product.product').get_product_available(cr, uid, [line.product_id.id], context=context)
-                res[line.id] = str(stock_available[line.product_id.id]) + ' / ' + str(stock_virtual[line.product_id.id]) +  ' / ' + str(line.product_id.stored_intermediate_stock)
+                res[line.id] = str(stock_available[line.product_id.id]) + ' / ' + str(line.product_id.stored_intermediate_stock) + ' / ' + str(stock_virtual[line.product_id.id])
             else:
                 res[line.id] = ''
         return res
