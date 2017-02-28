@@ -12,8 +12,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
             <field name="arch" type="xml">
                 <notebook position="before">
                     <!---->
-                    <div attrs="{'invisible':[('task_state','in', ('none')),('state', 'not in', ('draft', 'sent'))]}" >
+                    <div attrs="{'invisible':['|',('task_state','in', ('none')), ('id', '=', False)]}" 
+                    states="progress,manual">
                         <field name="task_state" invisible="1"/>
+                        <field name="id" invisible="1"/>
                         <label string="Etat Préparation : "  class="oe_inline" for="task_state"/>
                         
                         <span
