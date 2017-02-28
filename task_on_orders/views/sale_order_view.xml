@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © <YEAR(S)> <AUTHOR(S)>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+    <data>
+
+        <record id="sale_order_task_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                 
+                <!--<field name="pricelist_id" position="after">-->
+                    
+                    <!--"--> 
+                <notebook position="before">
+                    <div attrs="{'invisible':[('task_state','in', ('none'))]}">
+                        <field name="task_state" invisible="1"/>
+                        <label string="Etat Préparation : "  class="oe_inline" for="task_state"/>
+                        
+                        <span
+                            attrs="{'invisible':[('task_state','not in', ('done'))]}"
+                            class="openerp oe_kanban_color_6 oe_inline" style="padding: 3px;" >
+                            Livrable
+                        </span>
+                        <!----> 
+                        <span 
+                            attrs="{'invisible':[('task_state','in', ('done', 'cancelled'))]}"
+                            class="openerp oe_kanban_color_9 oe_inline" style="padding: 3px;" >
+                            En attente / En cours
+                        </span>
+                    </div>
+                </notebook>
+                <!--</field>-->
+        
+                <notebook position="inside">
+                    <page string="Associated Tasks" attrs="{'invisible':[('task_state','in', ('none'))]}">
+                        
+                        <field name="operate_task_ids" string="Associated tasks" readonly="1" />
+                    </page>
+                </notebook>
+            </field>
+            
+        </record>
+
+    </data>
+</openerp>

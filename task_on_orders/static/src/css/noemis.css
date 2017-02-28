@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+
+.openerp .oe_kanban_view .oe_kanban_color_0 {
+    /* GRIS*/
+  background-color: white;
+  color: #5a5a5a;
+}
+.openerp .oe_kanban_color_0 {
+    /* GRIS*/
+  background-color: white;
+  color: #5a5a5a;
+}
+.openerp .oe_kanban_view .oe_kanban_color_1 {
+	/*GRIS CLAIR*/
+  background-color: #cccccc;
+  color: #424242;
+}
+.openerp .oe_kanban_color_1 {
+	/*GRIS CLAIR*/
+  background-color: #cccccc;
+  color: #424242;
+}
+
+.openerp .oe_kanban_view .oe_kanban_color_2 {
+	/*Rose*/
+  background-color: #ffc7c7;
+  color: #7a3737;
+}
+.openerp .oe_kanban_color_2 {
+	/*Rose*/
+  background-color: #ffc7c7;
+  color: #7a3737;
+}
+.openerp .oe_kanban_view .oe_kanban_color_3 {
+	/*ROUGE*/
+  background-color: #FF8B83;
+  /*color: #514F70;*/
+  color: #5B5980 !important;
+}
+.openerp .oe_kanban_color_3 {
+	/*ROUGE*/
+  background-color: #FF8B83;
+  /*color: #514F70;*/
+  color: #5B5980 !important;
+}
+
+.openerp .oe_kanban_view .oe_kanban_color_4 {
+	/* VERT */
+  background-color: #3CFF46;
+  color: #3b3e75;
+}
+.openerp .oe_kanban_color_4 {
+	/* VERT */
+  background-color: #3CFF46;
+  color: #3b3e75;
+}
+.openerp .oe_kanban_view .oe_kanban_color_5 {
+	/* VERT entre deux*/
+  background-color: #c7ffd5;
+  color: #3b3e75;
+}
+.openerp .oe_kanban_color_5 {
+	/* VERT entre deux*/
+  background-color: #c7ffd5;
+  color: #3b3e75;
+}
+.openerp .oe_kanban_view .oe_kanban_color_6 {
+	/* VERT CLAIR*/
+  background-color: #C1FFBB;
+  color: #1a5d83;
+}
+.openerp .oe_kanban_color_6 {
+	/* VERT CLAIR*/
+  background-color: #C1FFBB;
+  color: #1a5d83;
+}
+
+.openerp .oe_kanban_view .oe_kanban_color_7 {
+	/* MAUVE*/
+  background-color: #c7d5ff;
+  color: #3b3e75;
+}
+.openerp .oe_kanban_color_7 {
+	/* MAUVE*/
+  background-color: #c7d5ff;
+  color: #3b3e75;
+}
+
+.openerp .oe_kanban_view .oe_kanban_color_8 {
+	/*MAUVE 2*/
+  background-color: #e3c7ff;
+  color: #4c3668;
+}
+.openerp .oe_kanban_color_8 {
+	/*MAUVE 2*/
+  background-color: #e3c7ff;
+  color: #4c3668;
+}
+
+.openerp .oe_kanban_view .oe_kanban_color_9 {
+	/*ORANGE */
+  background-color: #FFB638;
+  color: #7B6F87;
+}
+.openerp .oe_kanban_color_9 {
+	/*ORANGE */
+  background-color: #FFB638;
+  color: #7B6F87;
+}
