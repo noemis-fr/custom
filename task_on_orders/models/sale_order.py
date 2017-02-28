@@ -37,10 +37,9 @@ class SaleOrderLine(Model):
         res = {}
         task_model = self.pool.get("project.task")
         for sol in self.browse(cr, uid, ids, context=context):
-            procurement_id = sol.procurement_id 
-            
+
             task_ids = task_model.search(cr, uid, [
-                        ('procurement_id', '=', procurement_id.id)
+                        ('sale_line_id', '=', sol.id)
                         ], context=context)
             
             res[sol.id] = [t.id for t in task_model.browse(cr, uid, task_ids)]

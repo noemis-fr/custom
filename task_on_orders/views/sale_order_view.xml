@@ -10,12 +10,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                 
-                <!--<field name="pricelist_id" position="after">-->
-                    
-                    <!--"--> 
                 <notebook position="before">
-                    <div attrs="{'invisible':[('task_state','in', ('none'))]}">
+                    <!---->
+                    <div attrs="{'invisible':[('task_state','in', ('none')),('state', 'not in', ('draft', 'sent'))]}" >
                         <field name="task_state" invisible="1"/>
                         <label string="Etat Préparation : "  class="oe_inline" for="task_state"/>
                         
@@ -24,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
                             class="openerp oe_kanban_color_6 oe_inline" style="padding: 3px;" >
                             Livrable
                         </span>
-                        <!----> 
+
                         <span 
                             attrs="{'invisible':[('task_state','in', ('done', 'cancelled'))]}"
                             class="openerp oe_kanban_color_9 oe_inline" style="padding: 3px;" >
@@ -32,7 +29,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
                         </span>
                     </div>
                 </notebook>
-                <!--</field>-->
         
                 <notebook position="inside">
                     <page string="Associated Tasks" attrs="{'invisible':[('task_state','in', ('none'))]}">
