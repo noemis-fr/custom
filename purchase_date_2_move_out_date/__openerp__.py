@@ -53,6 +53,7 @@ Copyright
         'stock',
         'sale',
         'sale_order_dates',
+        'sale_stock'
     ],
     'data': [
         'views/picking_view.xml',

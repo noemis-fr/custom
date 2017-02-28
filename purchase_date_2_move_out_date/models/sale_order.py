@@ -26,5 +26,6 @@ class SaleOrder(Model):
     _inherit = 'sale.order'
 
     _defaults = {
-        'requested_date': '2000-01-01',
+#        'requested_date': '2000-01-01',
     }
+
