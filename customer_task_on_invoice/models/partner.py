@@ -24,14 +24,19 @@ from openerp.osv.orm import Model
 from openerp.tools.translate import _
 
 
-class Invoice(Model):
-    _inherit = 'account.invoice'
+class Partner(Model):
+    _inherit = 'res.partner'
 
     
 
     _columns = {
-        'memo_task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True),
-        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+#        'memo_task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,
+#                                    
+#                                    )
+        'memo_task_ids': fields.one2many('project.task', 'partner_id', 'Tasks', domain=[('sale_line_id', '=', False)]),
+        'operate_task_ids': fields.one2many('project.task', 'partner_id', 'Tasks', domain=[('sale_line_id', '!=', False)]),
     }
+
+    
 
     

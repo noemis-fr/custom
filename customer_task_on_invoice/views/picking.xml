@@ -24,7 +24,7 @@
             <field name="inherit_id" ref="stock.view_picking_form" />
             <field name="arch" type="xml">
                 <field name="invoice_state" position="after">
-                    <field name="task_ids" widget="many2many_tags" string="Types Documents" />
+                    <field name="memo_task_ids" widget="many2many_tags" string="Types Documents" />
                 </field>
             </field>
         </record>
@@ -33,7 +33,7 @@
             <field name="inherit_id" ref="stock.view_picking_out_form" />
             <field name="arch" type="xml">
                 <field name="invoice_state" position="after">
-                    <field name="task_ids" widget="many2many_tags" string="Types Documents" />
+                    <field name="memo_task_ids" widget="many2many_tags" string="Types Documents" />
                 </field>
             </field>
         </record>
@@ -42,7 +42,7 @@
             <field name="inherit_id" ref="stock.view_picking_in_form" />
             <field name="arch" type="xml">
                 <field name="invoice_state" position="after">
-                    <field name="task_ids" widget="many2many_tags" string="Types Documents" />
+                    <field name="memo_task_ids" widget="many2many_tags" string="Types Documents" />
                 </field>
             </field>
         </record>

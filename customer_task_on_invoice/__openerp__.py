@@ -38,11 +38,12 @@ Copyright
     'website': 'http://www.noemis.fr',
     'license': 'AGPL-3',
     'depends': [
-        'sale','stock'
+        'sale','stock', 'project'
     ],
     'data': [
         'views/invoice.xml',
         'views/picking.xml',
+        'views/partner.xml',
     ],
     'demo': [
     ],

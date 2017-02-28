@@ -30,7 +30,8 @@ class StockPicking(Model):
     
 
     _columns = {
-        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+        'memo_task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
+        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
     }
 
     
@@ -38,9 +39,9 @@ class StockPickingIn(Model):
     _inherit = 'stock.picking.in'
 
     
-
     _columns = {
-        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+        'memo_task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
+        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
     }
 
     
@@ -50,7 +51,8 @@ class StockPickingOut(Model):
     
 
     _columns = {
-        'task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+        'memo_task_ids': fields.related('partner_id','task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
+        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True,),
     }
 
     
