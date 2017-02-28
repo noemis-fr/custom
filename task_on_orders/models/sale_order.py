@@ -57,12 +57,9 @@ SaleOrderLine()
 
 class SaleOrder(Model):
     _inherit = 'sale.order'
-
-        
         
     def _get_task_state(self, cr, uid, ids, name, arg, context=None):
         res = {}
-        _logger.debug("BROWSE TASKS IDS")
         task_model = self.pool.get("project.task")
         
         for so in self.browse(cr, uid, ids, context=context):            
@@ -79,7 +76,6 @@ class SaleOrder(Model):
                     state='pending'
                             
             res[so.id] = state
-
         return res
     
     
