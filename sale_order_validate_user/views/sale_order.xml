@@ -7,8 +7,25 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
-                    <field name="validate_commercial_user" readonly="1"/>
+                    <!--<field name="is_sale_admin" readonly="1"/>-->
+                    <field name="validate_commercial_user" readonly="1" colspan="2"/>
                 </field>
+            </field>
+        </record>
+        
+        <record id="sale_order_form_modify_validate_user" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_order_validate_user.sale_order_form_validate_user"/>
+            <field name="groups_id" eval="[(4,ref('base.group_sale_manager'))]"/>
+            
+            
+            <field name="arch" type="xml">
+                <field name="validate_commercial_user" >
+                    <span string="Bons droits"> </span>
+                </field>
+                <field name="validate_commercial_user" position="attributes" >
+                    <attribute name="readonly" eval="0"/>
+                </field>            
             </field>
         </record>
         

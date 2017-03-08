@@ -26,13 +26,24 @@ class SaleOrder(Model):
     _inherit = 'sale.order'
 
 
+#    def _is_admin(
+#            self, cr, uid, ids, fields, args, context=None):
+#        res = {}
+#        user_model = self.pool.get('res.users')
+#        is_admin = user_model.browse(cr, uid, uid)
+#        
+#        for so in self.browse(cr, uid, ids, context=context):
+#            
+#            
+
     def action_wait(self, cr, uid, ids, context=None):
         res = super(SaleOrder, self).action_wait(cr, uid, ids, context=context)
         for o in self.browse(cr, uid, ids):
-            self.write(cr, uid, [o.id], {'validate_commercial_user': uid}, context=context)
+            if not o.validate_commercial_user:
+                self.write(cr, uid, [o.id], {'validate_commercial_user': uid}, context=context)
         return res
 
     _columns = {
-        'validate_commercial_user': fields.many2one('res.users', string='User that validate the SO')
-    
+        'validate_commercial_user': fields.many2one('res.users', string='User that validate the SO'),
+#        'is_sale_admin': fields.function( _is_admin, type='boolean', string='Sale Admin?')
     }
