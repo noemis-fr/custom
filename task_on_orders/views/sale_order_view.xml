@@ -9,6 +9,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
             <field name="name">sale.order.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="priority" eval="100"/>
             <field name="arch" type="xml">
                 <notebook position="before">
                     <!---->

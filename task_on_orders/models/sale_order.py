@@ -41,7 +41,6 @@ class SaleOrderLine(Model):
             task_ids = task_model.search(cr, uid, [
                         ('sale_line_id', '=', sol.id)
                         ], context=context)
-            
             res[sol.id] = [t.id for t in task_model.browse(cr, uid, task_ids)]
         return res
         
@@ -56,13 +55,28 @@ SaleOrderLine()
 
 class SaleOrder(Model):
     _inherit = 'sale.order'
-        
+    
+    
+    def _get_tasks(
+            self, cr, uid, ids, fields, args, context=None):
+        res = {}
+        task_model = self.pool.get("project.task")
+        for so in self.browse(cr, uid, ids, context=context):
+            tasks = []
+            for sol in so.order_line:
+                task_ids = task_model.search(cr, uid, [
+                            ('sale_line_id', '=', sol.id)
+                            ], context=context)
+
+                tasks += [t.id for t in task_model.browse(cr, uid, task_ids)]
+            res[so.id] = tasks 
+        return res
+    
     def _get_task_state(self, cr, uid, ids, name, arg, context=None):
         res = {}
         task_model = self.pool.get("project.task")
         
         for so in self.browse(cr, uid, ids, context=context):            
-            
             if len(so.operate_task_ids) == 0:
                 state = 'none'
             else:
@@ -79,7 +93,9 @@ class SaleOrder(Model):
     
     
     _columns = {
-        'operate_task_ids': fields.related('order_line','operate_task_ids', type='one2many', relation='project.task', string='Associated Tasks', readonly=True),
+        'operate_task_ids': fields.function(
+            _get_tasks, type='one2many', relation="project.task"
+            , string='Associated Tasks', readonly=True),
         'task_state' : fields.function(_get_task_state, type='char',  string='Task State Summary')
     }
 
