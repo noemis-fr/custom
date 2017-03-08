@@ -37,15 +37,15 @@ class Picking(Model):
         for pick_id in self.browse(cr, uid, ids):
             self.write(cr, uid, pick_id.id, 
                             {'min_date_asked_for' : pick_id.min_date})
-            _logger.debug("CONFIRM picking %s" % pick_id.min_date)
+            
             
         return res
         
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for pick in self.browse(cr, uid, ids):
-            _logger.debug("INITIAL DATE ? %s" % pick)
-            res[pick.id] = True if pick.min_date == pick.min_date_asked_for else False
+            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            res[pick.id] = is_initial_date
         return res
     
     _columns = {
@@ -62,8 +62,8 @@ class PickingOut(Model):
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for pick in self.browse(cr, uid, ids):
-            _logger.debug("INITIAL DATE ? %s" % pick)
-            res[pick.id] = True if pick.min_date == pick.min_date_asked_for else False
+            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            res[pick.id] = is_initial_date
         return res
             
     _columns = {
