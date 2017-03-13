@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
                     <!--<field name="is_sale_admin" readonly="1"/>-->
-                    <field name="validate_commercial_user" readonly="1" colspan="2"/>
+                    <field name="validate_commercial_user" string="Validé par" readonly="1" colspan="2"/>
                 </field>
             </field>
         </record>
