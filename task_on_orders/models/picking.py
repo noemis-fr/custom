@@ -37,7 +37,7 @@ class Picking(Model):
     _columns = {
     
         'task_state' : fields.related('sale_id', 'task_state', type='char',  relation='sale.order', string='Task State Summary'),
-        'operate_task_ids': fields.related('sale_id','operate_task_ids', type='one2many', relation='project.task', string='Associated Tasks', readonly=True),
+        'operate_task_ids': fields.related('sale_id','operate_task_ids', type='one2many', relation='project.task', string='Listing NSP', readonly=True),
     }
 
     

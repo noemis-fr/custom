@@ -20,13 +20,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
                         <label string="Etat Préparation : "  class="oe_inline" for="task_state"/>
                         
                         <span
-                            attrs="{'invisible':[('task_state','not in', ('done'))]}"
+                            attrs="{'invisible':[('task_state','not in', ('done', 'none'))]}"
                             class="openerp oe_kanban_color_6 oe_inline" style="padding: 3px;" >
                             Livrable
                         </span>
 
                         <span 
-                            attrs="{'invisible':[('task_state','in', ('done', 'cancelled'))]}"
+                            attrs="{'invisible':[('task_state','in', ('done', 'cancelled', 'none'))]}"
                             class="openerp oe_kanban_color_9 oe_inline" style="padding: 3px;" >
                             En attente / En cours
                         </span>
@@ -34,9 +34,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
                 </notebook>
         
                 <notebook position="inside">
-                    <page string="Associated Tasks" attrs="{'invisible':[('task_state','in', ('none'))]}">
+                    <page string="Listing NSP" attrs="{'invisible':[('task_state','in', ('none'))]}">
                         
-                        <field name="operate_task_ids" string="Associated tasks" readonly="1" />
+                        <field name="operate_task_ids" string="Listing NSP" readonly="1" />
                     </page>
                 </notebook>
             </field>

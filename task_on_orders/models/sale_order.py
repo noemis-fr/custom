@@ -48,7 +48,7 @@ class SaleOrderLine(Model):
     _columns = {        
         'operate_task_ids': fields.function(
             _get_tasks, type='one2many', relation="project.task"
-            , string='Associated Tasks')
+            , string='Listing NSP')
         
     }
 SaleOrderLine()
@@ -95,7 +95,7 @@ class SaleOrder(Model):
     _columns = {
         'operate_task_ids': fields.function(
             _get_tasks, type='one2many', relation="project.task"
-            , string='Associated Tasks', readonly=True),
+            , string='Listing NSP', readonly=True),
         'task_state' : fields.function(_get_task_state, type='char',  string='Task State Summary')
     }
 
