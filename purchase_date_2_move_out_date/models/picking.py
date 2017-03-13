@@ -73,3 +73,31 @@ class PickingOut(Model):
 
 
 PickingOut()
+
+class StockMove(Model):
+    _inherit = 'stock.move'
+
+    def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        for mv in self.browse(cr, uid, ids):
+            is_initial_date = mv.date_expected == mv.picking_id.min_date_asked_for 
+            res[mv.id] = is_initial_date
+        return res
+
+    def _get_initial_date_text(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        for mv in self.browse(cr, uid, ids):
+            is_initial_date = mv.date_expected == mv.picking_id.min_date_asked_for 
+            res[mv.id] = "Planned"
+            if is_initial_date : 
+                res[mv.id] = "Theorique"
+            
+        return res
+            
+    _columns = {
+        'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
+        'is_initial_date_text': fields.function(_get_initial_date_text, type='Char', string="Initial Date")
+    }
+
+
+StockMove()

@@ -30,7 +30,7 @@ class PurchaseOrderLine(Model):
     _DELIVERY_DELAY_DAYS = 0
 
     _defaults = {
-        'date_planned': '2000-01-01',
+#        'date_planned': '2000-01-01',
     }
 
     def write(self, cr, uid, ids, vals, context=None):

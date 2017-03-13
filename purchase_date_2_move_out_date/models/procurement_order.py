@@ -27,9 +27,9 @@ from openerp.osv.orm import Model
 class ProcurementOrder(Model):
     _inherit = 'procurement.order'
 
-    def _get_purchase_schedule_date(
-            self, cr, uid, procurement, company, context=None):
-        return datetime.strptime('2000-01-01', "%Y-%m-%d")
+#    def _get_purchase_schedule_date(
+#            self, cr, uid, procurement, company, context=None):
+#        return datetime.strptime('2000-01-01', "%Y-%m-%d")
 
     def _get_purchase_order_date(
             self, cr, uid, procurement, company, schedule_date, context=None):

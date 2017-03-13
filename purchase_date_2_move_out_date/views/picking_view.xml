@@ -8,6 +8,12 @@
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
                     <field name="date_expected"/>
+                    <field name="is_initial_date" invisible="1"/>
+                    <field name="is_initial_date_text" string="Date Liv."/>
+                    <!--<div>coucou</div>-->
+<!--                    <span>
+                        Date Théorique
+                    </span>-->
                 </field>
             </field>
         </record>

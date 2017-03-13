@@ -34,7 +34,7 @@ class PurchaseOrder(Model):
     }
 
     _defaults = {
-        'minimum_planned_date': '2000-01-01',
+#        'minimum_planned_date': '2000-01-01',
     }
 
     def write(self, cr, uid, ids, vals, context=None):
