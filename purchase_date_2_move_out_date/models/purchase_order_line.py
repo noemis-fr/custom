@@ -22,6 +22,9 @@
 from datetime import datetime, timedelta
 
 from openerp.osv.orm import Model
+from openerp.osv import fields
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class PurchaseOrderLine(Model):
@@ -78,3 +81,38 @@ class PurchaseOrderLine(Model):
                                     {'date_expected': delivery_date},
                                     context=context)
         return res
+
+
+    def create(self, cr, uid, vals, context=None):
+        _logger.debug("CREATE purchase order line %s" % vals)
+        vals.update({'min_date_asked_for': vals['date_planned']})
+        return super(PurchaseOrderLine, self).create(
+            cr, uid, vals, context=context)
+    
+    def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        for line in self.browse(cr, uid, ids):
+            is_initial_date = line.date_planned == line.min_date_asked_for 
+            res[line.id] = is_initial_date
+        return res
+
+    def _get_initial_date_text(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        for line in self.browse(cr, uid, ids):
+            is_initial_date = line.date_planned == line.min_date_asked_for 
+            res[line.id] = "Planned"
+            if is_initial_date : 
+                res[line.id] = "Theorique"
+        _logger.debug("DATE %s" % res)
+        return res
+            
+    _columns = {
+        'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
+        'is_initial_date_text': fields.function(_get_initial_date_text, type='char', string="Initial Date",),
+        'min_date_asked_for': fields.date('Date of initial demand',),
+    }
+    
+    _defaults = {
+        'is_initial_date_text': 'Theorique'
+    
+    }

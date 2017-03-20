@@ -111,7 +111,7 @@ class StockMove(Model):
             
     _columns = {
         'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
-        'is_initial_date_text': fields.function(_get_initial_date_text, type='Char', string="Initial Date")
+        'is_initial_date_text': fields.function(_get_initial_date_text, type='char', string="Initial Date")
     }
 
 

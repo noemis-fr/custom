@@ -57,5 +57,6 @@ Copyright
     ],
     'data': [
         'views/picking_view.xml',
+        'views/purchase_view.xml',
     ],
 }

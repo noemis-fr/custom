@@ -21,6 +21,8 @@
 
 from openerp.osv import fields
 from openerp.osv.orm import Model
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class PurchaseOrder(Model):
@@ -33,9 +35,6 @@ class PurchaseOrder(Model):
             'purchase.order.line', 'order_id', 'Order Lines'),
     }
 
-    _defaults = {
-#        'minimum_planned_date': '2000-01-01',
-    }
 
     def write(self, cr, uid, ids, vals, context=None):
         line_obj = self.pool['purchase.order.line']
@@ -50,3 +49,17 @@ class PurchaseOrder(Model):
                     'date_planned': vals['minimum_planned_date']},
                     context=context)
         return res
+
+
+    def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        _logger.debug("Get latest Date %s")
+        for pick in self.browse(cr, uid, ids):
+            is_initial_date = all(line.date_planned == line.min_date_asked_for  for line in pick.order_line)
+            res[pick.id] = is_initial_date
+        return res
+    
+    _columns = {
+        'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
+#        'min_date_asked_for': fields.datetime('Date of initial demand',),
+    }
