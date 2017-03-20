@@ -72,6 +72,21 @@ class PickingOut(Model):
     }
 
 
+class PickingOut(Model):
+    _inherit = 'stock.picking.in'
+
+    def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
+        res = {}
+        for pick in self.browse(cr, uid, ids):
+            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            res[pick.id] = is_initial_date
+        return res
+            
+    _columns = {
+        'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
+        'min_date_asked_for': fields.datetime('Date of initial demand',),
+    }
+
 PickingOut()
 
 class StockMove(Model):
