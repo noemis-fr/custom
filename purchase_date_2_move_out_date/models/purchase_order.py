@@ -38,8 +38,9 @@ class PurchaseOrder(Model):
 
     def write(self, cr, uid, ids, vals, context=None):
         line_obj = self.pool['purchase.order.line']
+        context.update({'manually_changed': True})
         res = super(PurchaseOrder, self).write(
-            cr, uid, ids, vals, context=context)
+            cr, uid, ids, vals, context=context)        
         if vals.get('minimum_planned_date', False):
             for order in self.browse(cr, uid, ids, context=context):
                 # We force to rewrite date_planned on each line to change date
@@ -53,7 +54,7 @@ class PurchaseOrder(Model):
 
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
-        _logger.debug("Get latest Date %s")
+
         for pick in self.browse(cr, uid, ids):
             is_initial_date = all(line.date_planned == line.min_date_asked_for  for line in pick.order_line)
             res[pick.id] = is_initial_date
@@ -61,5 +62,5 @@ class PurchaseOrder(Model):
     
     _columns = {
         'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
-#        'min_date_asked_for': fields.datetime('Date of initial demand',),
+
     }

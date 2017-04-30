@@ -40,6 +40,14 @@
                     <field name="is_initial_date_text" />  
                     <!--<field name="min_date_asked_for" invisible="1"/>-->  
                 </xpath>   
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="context" >{'manually_changed': True}</attribute>  
+                    <!--<field name="min_date_asked_for" invisible="1"/>-->  
+                </xpath>   
+                <xpath expr="//field[@name='order_line']" position="attributes">
+                    <attribute name="context" >{'manually_changed': True}</attribute>  
+                    <!--<field name="min_date_asked_for" invisible="1"/>-->  
+                </xpath>   
                 
             </field>            
         </record>

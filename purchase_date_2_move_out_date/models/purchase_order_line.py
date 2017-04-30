@@ -39,9 +39,10 @@ class PurchaseOrderLine(Model):
     def write(self, cr, uid, ids, vals, context=None):
         move_obj = self.pool['stock.move']
         res = super(PurchaseOrderLine, self).write(
-            cr, uid, ids, vals, context=context)
-
-        if 'date_planned' in vals:
+            cr, uid, ids, vals, context=context)    
+        manually_changed = context.get('manually_changed', False)
+    
+        if 'date_planned' in vals :
             delivery_date = (
                 datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
                 timedelta(days=self._DELIVERY_DELAY_DAYS)
@@ -53,11 +54,15 @@ class PurchaseOrderLine(Model):
                     cr, uid,
                     [('purchase_line_id', '=', purchase_order_line.id)],
                     context=context)
+                update_vals = {'date_expected': vals['date_planned']}
+                if not manually_changed:
+                    #Prevent initial date to be changed by non human action
+                    update_vals.update({'min_date_asked_for': vals['date_planned']})
                 if move_in_ids:
                     # Change Date of the 'In' moves
                     move_obj.write(
                         cr, uid, move_in_ids,
-                        {'date_expected': vals['date_planned']},
+                        update_vals,
                         context=context)
 
                 # Get Sale Orders that have generated this Purchase Order
@@ -76,6 +81,10 @@ class PurchaseOrderLine(Model):
                             if move_out.product_id.id ==\
                                     purchase_order_line.product_id.id and\
                                     move_out.state not in ['done', 'cancel']:
+                                update_vals = {'date_expected': delivery_date}
+                                if not manually_changed:
+                                    #Prevent initial date to be changed by non human action
+                                    update_vals.update({'min_date_asked_for': delivery_date})
                                 move_obj.write(
                                     cr, uid, [move_out.id],
                                     {'date_expected': delivery_date},
