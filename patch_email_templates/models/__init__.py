@@ -1,3 +1,3 @@
 # -*- encoding: utf-8 -*-
 #from . import sale_order
-from . import email_template
+from . import mail_mail

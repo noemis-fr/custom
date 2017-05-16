@@ -22,7 +22,9 @@
 from openerp import tools
 from openerp.osv import osv, fields
 
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class mail_compose_message(osv.TransientModel):
     _inherit = 'mail.compose.message'
@@ -57,6 +59,7 @@ class mail_compose_message(osv.TransientModel):
             if wizard.body:
                 email_context['body_html'] = wizard.body
             new_attachment_ids = []
+            email_context['email_template'] = template.id
             for attachment in wizard.attachment_ids:
                 if attachment in template.attachment_ids:
                     new_attachment_ids.append(self.pool.get('ir.attachment').copy(cr, uid, attachment.id, {'res_model': 'mail.compose.message', 'res_id': wizard.id}, context=context))
@@ -64,9 +67,6 @@ class mail_compose_message(osv.TransientModel):
                     new_attachment_ids.append(attachment.id)
                 self.write(cr, uid, wizard.id, {'attachment_ids': [(6, 0, new_attachment_ids)]}, context=context)
 
-        if not template:
-            return super(mail_compose_message, self).send_mail(cr, uid, ids, context=email_context)
+        return super(mail_compose_message, self).send_mail(cr, uid, ids, context=email_context)
 
-        return email_template.send_mail(cr, uid, template.id, email_context.get('default_res_id', None) , force_send=False, context=email_context)
-
-    
+ 
