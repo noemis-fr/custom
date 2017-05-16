@@ -41,7 +41,7 @@ class PurchaseOrderLine(Model):
         res = super(PurchaseOrderLine, self).write(
             cr, uid, ids, vals, context=context)    
         manually_changed = context.get('manually_changed', False)
-    
+        _logger.debug("MANUALLY CHANGED ? : %s" % manually_changed)
         if 'date_planned' in vals :
             delivery_date = (
                 datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
@@ -87,14 +87,15 @@ class PurchaseOrderLine(Model):
                                     update_vals.update({'min_date_asked_for': delivery_date})
                                 move_obj.write(
                                     cr, uid, [move_out.id],
-                                    {'date_expected': delivery_date},
+                                    update_vals,
                                     context=context)
         return res
 
 
     def create(self, cr, uid, vals, context=None):
         _logger.debug("CREATE purchase order line %s" % vals)
-        vals.update({'min_date_asked_for': vals['date_planned']})
+        if 'date_planned' in vals :
+            vals.update({'min_date_asked_for': vals['date_planned']})
         return super(PurchaseOrderLine, self).create(
             cr, uid, vals, context=context)
     
