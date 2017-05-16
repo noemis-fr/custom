@@ -38,7 +38,9 @@ class PurchaseOrder(Model):
 
     def write(self, cr, uid, ids, vals, context=None):
         line_obj = self.pool['purchase.order.line']
-        context.update({'manually_changed': True})
+        if context is None:
+            context = {}
+            context.update({'manually_changed': True})
         res = super(PurchaseOrder, self).write(
             cr, uid, ids, vals, context=context)        
         if vals.get('minimum_planned_date', False):
