@@ -39,7 +39,10 @@ class PurchaseOrderLine(Model):
     def write(self, cr, uid, ids, vals, context=None):
         move_obj = self.pool['stock.move']
         res = super(PurchaseOrderLine, self).write(
-            cr, uid, ids, vals, context=context)    
+            cr, uid, ids, vals, context=context) 
+        if context is None:
+            context = {}
+            
         manually_changed = context.get('manually_changed', False)
         _logger.debug("MANUALLY CHANGED ? : %s" % manually_changed)
         if 'date_planned' in vals :
