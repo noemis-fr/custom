@@ -31,8 +31,8 @@ class ProcurementOrder(Model):
 #            self, cr, uid, procurement, company, context=None):
 #        return datetime.strptime('2000-01-01', "%Y-%m-%d")
 
-    def _get_purchase_order_date(
-            self, cr, uid, procurement, company, schedule_date, context=None):
-        return datetime.strptime(
-            fields.date.context_today(self, cr, uid, context=context),
-            "%Y-%m-%d")
+#    def _get_purchase_order_date(
+#            self, cr, uid, procurement, company, schedule_date, context=None):
+#        return datetime.strptime(
+#            fields.date.context_today(self, cr, uid, context=context),
+#            "%Y-%m-%d")

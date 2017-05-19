@@ -91,6 +91,19 @@ PickingOut()
 
 class StockMove(Model):
     _inherit = 'stock.move'
+    
+    
+    def write(self, cr, uid, ids, vals, context=None):
+        if context is None:
+            context = {}
+
+        manually_changed = context.get('manually_changed', False)
+        if not manually_changed and 'date_planned' in vals:
+                    #Prevent initial date to be changed by non human action
+                    vals.update({'min_date_asked_for': vals['date_planned']})
+        res = super(StockMove, self).write(
+            cr, uid, ids, vals, context=context)    
+        
 
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
