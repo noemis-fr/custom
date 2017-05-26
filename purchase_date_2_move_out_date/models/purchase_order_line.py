@@ -58,9 +58,9 @@ class PurchaseOrderLine(Model):
                     [('purchase_line_id', '=', purchase_order_line.id)],
                     context=context)
                 update_vals = {'date_expected': vals['date_planned']}
-                if not manually_changed:
-                    #Prevent initial date to be changed by non human action
-                    update_vals.update({'min_date_asked_for': vals['date_planned']})
+#                if not manually_changed:
+#                    #Prevent initial date to be changed by non human action
+#                    update_vals.update({'min_date_asked_for': vals['date_planned']})
                 if move_in_ids:
                     # Change Date of the 'In' moves
                     move_obj.write(
@@ -85,9 +85,9 @@ class PurchaseOrderLine(Model):
                                     purchase_order_line.product_id.id and\
                                     move_out.state not in ['done', 'cancel']:
                                 update_vals = {'date_expected': delivery_date}
-                                if not manually_changed:
-                                    #Prevent initial date to be changed by non human action
-                                    update_vals.update({'min_date_asked_for': delivery_date})
+#                                if not manually_changed:
+#                                    #Prevent initial date to be changed by non human action
+#                                    update_vals.update({'min_date_asked_for': delivery_date})
                                 move_obj.write(
                                     cr, uid, [move_out.id],
                                     update_vals,

@@ -37,6 +37,9 @@ class Picking(Model):
         for pick_id in self.browse(cr, uid, ids):
             self.write(cr, uid, pick_id.id, 
                             {'min_date_asked_for' : pick_id.min_date})
+            for mv in pick_id.move_lines:
+                self.pool.get('stock.move').write(cr, uid, mv.id, 
+                            {'min_date_asked_for' : mv.date_expected})
             
             
         return res
@@ -44,7 +47,7 @@ class Picking(Model):
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for pick in self.browse(cr, uid, ids):
-            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            is_initial_date = all(line.is_initial_date for line in pick.move_lines)
             res[pick.id] = is_initial_date
         return res
     
@@ -62,7 +65,7 @@ class PickingOut(Model):
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for pick in self.browse(cr, uid, ids):
-            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            is_initial_date = all(line.is_initial_date for line in pick.move_lines)
             res[pick.id] = is_initial_date
         return res
             
@@ -78,7 +81,7 @@ class PickingOut(Model):
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for pick in self.browse(cr, uid, ids):
-            is_initial_date = all(line.date_expected == pick.min_date_asked_for for line in pick.move_lines)
+            is_initial_date = all(line.is_initial_date for line in pick.move_lines)
             res[pick.id] = is_initial_date
         return res
             
@@ -93,29 +96,39 @@ class StockMove(Model):
     _inherit = 'stock.move'
     
     
+    def create(self, cr, uid, vals, context=None):        
+        if  vals.get('date_expected', False):
+            vals.update({'min_date_asked_for': vals['date_expected']})
+        res = super(StockMove, self).create(
+            cr, uid, vals, context=context)   
+            
+        return res
+        
     def write(self, cr, uid, ids, vals, context=None):
         if context is None:
             context = {}
 
-        manually_changed = context.get('manually_changed', False)
-        if not manually_changed and 'date_planned' in vals:
-                    #Prevent initial date to be changed by non human action
-                    vals.update({'min_date_asked_for': vals['date_planned']})
+#        manually_changed = context.get('manually_changed', False)
+#        if not manually_changed and 'date_expected' in vals:
+#                    #Prevent initial date to be changed by non human action
+#                    vals.update({'min_date_asked_for': vals['date_expected']})
         res = super(StockMove, self).write(
             cr, uid, ids, vals, context=context)    
+        
+        return res
         
 
     def _get_initial_date(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for mv in self.browse(cr, uid, ids):
-            is_initial_date = mv.date_expected == mv.picking_id.min_date_asked_for 
+            is_initial_date = mv.date_expected == mv.min_date_asked_for 
             res[mv.id] = is_initial_date
         return res
 
     def _get_initial_date_text(self, cr, uid, ids, name, arg, context=None):
         res = {}
         for mv in self.browse(cr, uid, ids):
-            is_initial_date = mv.date_expected == mv.picking_id.min_date_asked_for 
+            is_initial_date = mv.date_expected == mv.min_date_asked_for 
             res[mv.id] = "Planned"
             if is_initial_date : 
                 res[mv.id] = "Theorique"
@@ -124,7 +137,8 @@ class StockMove(Model):
             
     _columns = {
         'is_initial_date': fields.function(_get_initial_date, type='boolean', string="Initial Date"),
-        'is_initial_date_text': fields.function(_get_initial_date_text, type='char', string="Initial Date")
+        'is_initial_date_text': fields.function(_get_initial_date_text, type='char', string="Initial Date"),
+        'min_date_asked_for': fields.datetime('Date of initial demand',)
     }
 
 
