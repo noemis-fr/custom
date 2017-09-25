@@ -31,12 +31,12 @@ class ResPartner(Model):
 
     def name_get(self, cr, uid, ids, context=None):
 
-        return name_tools.extended_name_get(self, cr, uid, ids,'[#%(id)s][%(ref)s] %(name)s', ['id','ref', 'name'], context=context)
+        return name_tools.extended_name_get(self, cr, uid, ids,'[#%(id)s] %(name)s', ['id', 'name'], context=context)
 
         # ^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ # template mask field list
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
         
-        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['ref', 'name','id'])
+        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['name','id'])
 
         # ^^^^^^^^^^^^^^^^^^^^ # field list to search
 
