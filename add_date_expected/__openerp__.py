@@ -1,14 +1,14 @@
 {
-    'name': 'add id in search for res.partner',
+    'name': 'add date expected',
     'version': '1.0',
-    'category': 'Report',
     'author': "Mind And Go",
     'website': "http://www.mind-and-go.com",
     'summary': ' ',
     'sequence':99,
     
-    'depends': ['base', 'base_util_refcodes'],
+    'depends': ['stock'],
     'data': [
+        'views/stock_view.xml',
 ],
     'qweb': [
          ],
