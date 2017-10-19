@@ -20,23 +20,58 @@
 #
 ##############################################################################
 import logging
+from openerp.osv import fields
 from openerp.osv.orm import Model
 from base_util_refcodes import name_tools
+from docutils.utils import column_indices
+from xlrd.book import display_cell_address
 
 _logger = logging.getLogger(__name__)
    
 class ResPartner(Model):
     _inherit = 'res.partner'
     
+    def _commercial_partner_compute(self, cr, uid, ids, name, args, context=None):
+        """ Returns the partner that is considered the commercial
+        entity of this partner. The commercial entity holds the master data
+        for all commercial fields (see :py:meth:`~_commercial_fields`) """
+        result = dict.fromkeys(ids, False)
+        for partner in self.browse(cr, uid, ids, context=context):
+            current_partner = partner 
+            while not current_partner.is_company and current_partner.parent_id:
+                current_partner = current_partner.parent_id
+            result[partner.id] = current_partner.id
+        return result
+
+    _columns={
+        'commercial_parent_id': fields.related('commercial_partner_id', 'id', string='id of society', type='integer', store=True)
+    }
 
     def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        res = []
+        for record in self.browse(cr, uid, ids, context=context):
+            name = record.name
+            if record.parent_id and not record.is_company:
+                name = "%s, %s" % (record.parent_name, name)
+            if context.get('show_address'):
+                name = name + "\n" + self._display_address(cr, uid, record, without_company=True, context=context)
+                name = name.replace('\n\n','\n')
+                name = name.replace('\n\n','\n')
+            if context.get('show_email') and record.email:
+                name = "%s <%s>" % (name, record.email)
+            name = "[%s] %s" % (record.commercial_parent_id, name)
+            res.append((record.id, name))
+        return res
 
-        return name_tools.extended_name_get(self, cr, uid, ids,'[%(id)s] %(name)s', ['id', 'name'], context=context)
 
         # ^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ # template mask field list
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
         
-        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['name','id'])
+        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['name','commercial_parent_id','id'])
 
         # ^^^^^^^^^^^^^^^^^^^^ # field list to search
 
