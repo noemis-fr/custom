@@ -22,26 +22,12 @@
 import logging
 from openerp.osv import fields
 from openerp.osv.orm import Model
-from base_util_refcodes import name_tools
-from docutils.utils import column_indices
-from xlrd.book import display_cell_address
 
 _logger = logging.getLogger(__name__)
    
 class ResPartner(Model):
     _inherit = 'res.partner'
     
-    def _commercial_partner_compute(self, cr, uid, ids, name, args, context=None):
-        """ Returns the partner that is considered the commercial
-        entity of this partner. The commercial entity holds the master data
-        for all commercial fields (see :py:meth:`~_commercial_fields`) """
-        result = dict.fromkeys(ids, False)
-        for partner in self.browse(cr, uid, ids, context=context):
-            current_partner = partner 
-            while not current_partner.is_company and current_partner.parent_id:
-                current_partner = current_partner.parent_id
-            result[partner.id] = current_partner.id
-        return result
 
     _columns={
         'commercial_parent_id': fields.related('commercial_partner_id', 'id', string='id of society', type='integer', store=True)
