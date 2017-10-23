@@ -22,6 +22,7 @@
 import logging
 from openerp.osv import fields
 from openerp.osv.orm import Model
+from openerp.addons.base_util_refcodes import name_tools
 
 _logger = logging.getLogger(__name__)
    
@@ -57,7 +58,7 @@ class ResPartner(Model):
         # ^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^ # template mask field list
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
         
-        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['name','commercial_parent_id','id'])
+        return name_tools.extended_name_search(self, cr, user, name, args,operator, context=context, limit=limit, keys=['name','commercial_parent_id'])
 
         # ^^^^^^^^^^^^^^^^^^^^ # field list to search
 

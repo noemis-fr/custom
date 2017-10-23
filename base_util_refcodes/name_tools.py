@@ -76,6 +76,7 @@ def extended_name_search(obj, cr, user, name='', args=None, operator='ilike',
     """
     args = args or []
     keys = keys or [name]
+    ids=[]
     
     try: 
         int(name)
@@ -85,14 +86,14 @@ def extended_name_search(obj, cr, user, name='', args=None, operator='ilike',
     
     if name:
         for key in keys:
-            if key=='id' and test :
-                ids = obj.search(cr, user, [(key, '=', name)] + args,
+            if key in ('id','commercial_parent_id') and test :
+                ids += obj.search(cr, user, [(key, '=', name)] + args,
                              limit=limit, context=context)
-            elif key!='id':
-                ids = obj.search(cr, user, [(key, operator, name)] + args,
+            elif key not in('id','commercial_parent_id'):
+                ids += obj.search(cr, user, [(key, operator, name)] + args,
                              limit=limit, context=context)
-            if len(ids):
-                break  # Exit loop on first results
+#             if len(ids):
+#                 break  # Exit loop on first results
     else:
         ids = obj.search(cr, user, args, limit=limit, context=context)
     result = obj.name_get(cr, user, ids, context=context)
