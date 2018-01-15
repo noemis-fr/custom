@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+
+<record id="export_natixis" model="payment.mode.type">
+    <field name="name">Natixis</field>
+    <field name="code">GRL_FR_V7.0</field>
+    <field name="suitable_bank_types"
+        eval="[(6,0,[ref('base_iban.bank_iban')])]" />
+    <field name="ir_model_id" ref="model_banking_export_natixis_wizard"/>
+    <field name="payment_order_type">debit</field>
+</record>
+
+</data>
+</openerp>

@@ -41,6 +41,7 @@
         'wizard/export_natixis_view.xml',
         'security/ir.model.access.csv',
         'invoice.xml',
+        'data/payment_type_natixis.xml',
     ],
     'demo': ['sepa_direct_debit_demo.xml'],
     'description': '''
