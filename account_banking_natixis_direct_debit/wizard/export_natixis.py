@@ -171,7 +171,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     def customer_account_number(self, cr, uid, vals, context=None):
         account=""
         if vals.partner_id.commercial_partner_id.id:
-            account = str(vals.partner_id.commercial_partner_id.id)
+            account = str(vals.partner_id.commercial_partner_id.ref)
         account=account.rjust(10,'0')
         return account
         
