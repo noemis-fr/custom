@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="banking_export_natixis_wizard_view" model="ir.ui.view">
+    <field name="name">banking.export.natixis.wizard.view</field>
+    <field name="model">banking.export.natixis.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Natixis Direct Debit TXT file generation" version="7.0">
+            <field name="state" invisible="True"/>
+            <group states="finish">
+                <field name="total_amount" />
+                <field name="nb_transactions" />
+                <field name="file" filename="filename" />
+                <field name="filename" invisible="True"/>
+            </group>
+            <footer>
+                <button string="Generate" name="create_natixis" type="object" class="oe_highlight" states="create"/>
+                <button string="Cancel" special="cancel" class="oe_link" states="create"/>
+                <button string="Validate" name="save_natixis" type="object" class="oe_highlight" states="finish"/>
+                <button string="Cancel" name="cancel_natixis" type="object" class="oe_link" states="finish"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+</data>
+</openerp>
