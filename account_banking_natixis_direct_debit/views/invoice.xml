@@ -9,6 +9,7 @@
 	    <field name="arch" type="xml">
 	        <field name="payment_term" position="after">
 	            <field name="payment_type"/>
+	            <field name="payment_line_ids" widget="many2many_tags" string="Id des lignes envoyées à natixis"/>
 	        </field>
 	    </field>
 	</record> 
