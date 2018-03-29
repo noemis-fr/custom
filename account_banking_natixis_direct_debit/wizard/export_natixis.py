@@ -297,6 +297,11 @@ class banking_export_natixis_wizard(orm.TransientModel):
         bodyfinal=""
         
         for line in vals.line_ids:
+            self.pool.get('payment.line').write(
+            cr, uid, line.id, {'account_invoice_id': line.ml_inv_ref.id},
+            context=context)
+#             line.account_invoice_id=line.ml_inv_ref
+            
             nb_lines[0] +=1
             body=""
             

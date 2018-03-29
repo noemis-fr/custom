@@ -14,5 +14,6 @@ class account_invoice(orm.Model):
     _inherit = 'account.invoice'
 
     _columns = {
-        'payment_type': fields.selection([('CHQ','check'), ('VIR','transfert'),('TRT','effect')],'payment type')
+        'payment_type': fields.selection([('CHQ','check'), ('VIR','transfert'),('TRT','effect')],'payment type'),
+        'payment_line_ids': fields.one2many('payment.line', 'account_invoice_id', readonly=True),
     }

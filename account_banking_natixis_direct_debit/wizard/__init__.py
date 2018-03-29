@@ -21,3 +21,4 @@
 ##############################################################################
 
 from . import export_natixis
+from . import account_payment_order_natixis

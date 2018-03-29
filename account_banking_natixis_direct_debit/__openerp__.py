@@ -5,7 +5,7 @@
 {
     'name': 'Account Banking Netixis Direct Debit',
     'summary': 'Create Natixis files for Direct Debit',
-    'version': '7.0.0.1.0',
+    'version': '7.0.0.2.0',
     'license': 'AGPL-3',
     'author': "Mind And Go",
     'website': "http://www.mind-and-go.com",
@@ -13,7 +13,8 @@
     'depends': [
         'account_banking_mandate',
         'account_direct_debit',
-        'account_banking_pain_base'
+        'account_banking_pain_base',
+        'account_payment_partner'
     ],
     'external_dependencies': {
         'python': ['unidecode', 'lxml'],
@@ -25,6 +26,7 @@
         'security/ir.model.access.csv',
         'views/invoice.xml',
         'data/payment_type_natixis.xml',
+        'views/account_payment_view.xml',
     ],
     'demo': ['sepa_direct_debit_demo.xml'],
     'description': '''
