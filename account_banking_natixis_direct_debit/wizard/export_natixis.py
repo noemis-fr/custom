@@ -228,9 +228,9 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def line_total_amount(self, cr, uid, vals,total_amount, context=None):
         total=""
-        if vals.invoice.residual:
-            total_amount[0] +=vals.invoice.residual
-            total ="%.2f" % vals.invoice.residual
+        if vals.amount_residual:
+            total_amount[0] +=vals.amount_residual
+            total ="%.2f" % vals.amount_residual
         total=total.replace(',','')
         total=total.replace('.','')
         total=total.rjust(13,'0')

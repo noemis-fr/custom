@@ -12,7 +12,14 @@
 	                        <button name="search_entries_invoice" string="Natixis" type="object" class="oe_highlight"/>
 	                   <!--  </div> -->
                     </xpath>
+
+                    <xpath expr="//tree/field[@name='amount_currency']" position="replace">
+                     	<field name="invoice_amount" string="Amount"/>
+                    </xpath>
                     
+                     <xpath expr="//field[@name='total']" position="replace">
+                     	<field name="total_residual"/>
+                    </xpath>
             </field>
         </record>
 
