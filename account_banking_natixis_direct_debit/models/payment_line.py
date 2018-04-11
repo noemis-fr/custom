@@ -31,6 +31,9 @@ class payment_line(orm.Model):
     _columns = {
         'account_invoice_id': fields.many2one(
             'account.invoice'),
+        'invoice_amount': fields.related(
+            'move_line_id', 'amount_residual', type='float', string='Total Amount',
+            readonly=True),
     }
 
     
