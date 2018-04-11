@@ -487,7 +487,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
 #             'charge_bearer': gen_args['sepa_export'].charge_bearer,
             'total_amount': total_amount,
             'nb_transactions': transactions_count,
-            'file': base64.encodestring(xml_string),
+            'file': base64.encodestring(xml_string.encode('utf8')),
 #             'payment_order_ids': [(
 #                 6, 0, [x.id for x in gen_args['sepa_export'].payment_order_ids]
 #             )],
