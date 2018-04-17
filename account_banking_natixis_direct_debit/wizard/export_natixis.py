@@ -125,7 +125,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     def company_name(self, cr, uid, vals, context=None):
         name=vals.company_id.name.upper()
 #         _logger len 
-        name=name.ljust(25,' ')
+        name = self.normalize_string( cr, uid, vals,name,25)
         return name
         
     def bankruptcy_date(self, cr, uid, vals, context=None):
@@ -151,6 +151,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def customer_sequential_code(self, cr, uid, vals, context=None):
         lines_count=str(vals[0])
+        lines_count=lines_count[:6]
         lines_count=lines_count.rjust(6,'0')
         return lines_count
         
@@ -158,6 +159,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         siret = ""
         if vals.partner_id.commercial_partner_id.siret:
             siret=vals.partner_id.commercial_partner_id.siret
+            siret=siret[:14]
             siret=siret.rjust(14,'0')
         siret=siret.ljust(14,' ')
         return siret
@@ -165,7 +167,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     
     def customer_name(self, cr, uid, vals, context=None):
         name=vals.partner_id.commercial_partner_id.name
-        name=name.ljust(15,' ')
+        name=self.normalize_string( cr, uid, vals,name,15)
         return name
     
     def customer_account_number(self, cr, uid, vals, context=None):
@@ -188,12 +190,12 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def move_id(self, cr, uid, vals, context=None):
         move_id = vals.move_id.name
-        move_id=move_id.ljust(30,' ')
+        move_id=self.normalize_string( cr, uid, vals,move_id,30)
         return move_id
         
     def natixis_move_id(self, cr, uid, vals, context=None):
         natixis_move_id = vals.move_id.name+parser.parse(vals.date_maturity).strftime('%d%m%Y')
-        natixis_move_id=natixis_move_id.ljust(30,' ')
+        natixis_move_id = self.normalize_string( cr, uid, vals,natixis_move_id,30)
         return natixis_move_id
         
     def move_type(self, cr, uid, vals, context=None):
@@ -512,3 +514,12 @@ class banking_export_natixis_wizard(orm.TransientModel):
             context=context)
         wf_service = netsvc.LocalService('workflow')
         return {'type': 'ir.actions.act_window_close'}
+    
+    def normalize_string(self, cr, uid, ids, field_name, field_size,caracter =' '):
+        res=field_name
+        if len(res)>field_size:
+            res=res[:field_size]
+        else :
+            res = res.ljust(field_size,caracter)
+        return res
+        

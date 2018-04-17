@@ -22,6 +22,21 @@
                     </xpath>
             </field>
         </record>
+        
+         <record id="view_payment_order_tree_form_natixis" model="ir.ui.view">
+            <field name="name">payment.order.tree.form.natixis</field>
+            <field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_tree"/>
+            <field name="arch" type="xml">
+                    <field name="total" position="attributes">
+                	 <attribute name="invisible">True</attribute>
+                	</field>
+
+                    <field name="total" position="after">
+	                	<field name="total_residual"/>
+	                </field>
+            </field>
+        </record>
 
     </data>
 </openerp>
