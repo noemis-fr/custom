@@ -11,10 +11,9 @@
     'website': "http://www.mind-and-go.com",
     'category': 'Banking addons',
     'depends': [
-        'account_banking_mandate',
         'account_direct_debit',
         'account_banking_pain_base',
-        'account_payment_partner'
+        'account_payment_partner',
     ],
     'external_dependencies': {
         'python': ['unidecode', 'lxml'],

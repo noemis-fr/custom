@@ -23,10 +23,8 @@
                         <field name="create_date" />
                         <field name="file" filename="filename"/>
                         <field name="filename" invisible="True"/>
+                         <field name="payment_order_ids"/>
                     </group>
-                </page>
-                <page string="Payment Orders">
-                    <field name="payment_order_ids" nolabel="1"/>
                 </page>
             </notebook>
         </form>
@@ -41,6 +39,7 @@
         <tree string="Natixis Direct Debit">
             <field name="filename"/>
             <field name="create_date"/>
+            <field name="total_amount"/>
             <field name="nb_transactions"/>
             <field name="state"/>
         </tree>

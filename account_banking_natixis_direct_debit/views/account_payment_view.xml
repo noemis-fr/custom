@@ -20,6 +20,19 @@
                      <xpath expr="//field[@name='total']" position="replace">
                      	<field name="total_residual"/>
                     </xpath>
+		        <xpath expr="//field[@name='line_ids']/tree/field[@name='partner_id']" position="after">
+		            <field name="partner_ref"/>
+		        </xpath>
+		        
+		        <xpath expr="//tree/field[@name='bank_id']" position="attributes">
+		                	 <attribute name="invisible">True</attribute>
+		            
+		        </xpath>
+		        <xpath expr="//tree/field[@name='date']" position="attributes">
+		                	 <attribute name="invisible">True</attribute>
+		            
+		        </xpath>
+                    
             </field>
         </record>
         

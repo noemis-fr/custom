@@ -231,7 +231,10 @@ class banking_export_natixis_wizard(orm.TransientModel):
     def line_total_amount(self, cr, uid, vals,total_amount, context=None):
         total=""
         if vals.amount_residual:
-            total_amount[0] +=vals.amount_residual
+            if vals.invoice.type=="out_invoice":
+                total_amount[0] +=vals.amount_residual
+            elif vals.invoice.type=="out_refund":
+                total_amount[0] -=vals.amount_residual
             total ="%.2f" % vals.amount_residual
         total=total.replace(',','')
         total=total.replace('.','')
@@ -446,7 +449,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         value = self.create_footer(cr, uid, payment_order,nb_lines,total_amount, context)
         xml_root+=value
 
-        transactions_count_1_6 = 0
+        transactions_count_1_6 = len(payment_order.line_ids)
 
         return self.finalize_natixis_file_creation(
             cr, uid, ids, xml_root, total_amount[0], transactions_count_1_6,
@@ -490,7 +493,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
             'total_amount': total_amount,
             'nb_transactions': transactions_count,
             'file': base64.encodestring(xml_string.encode('utf8')),
-#             'payment_order_ids': [(
+             'payment_order_ids': context['active_id']
 #                 6, 0, [x.id for x in gen_args['sepa_export'].payment_order_ids]
 #             )],
         }

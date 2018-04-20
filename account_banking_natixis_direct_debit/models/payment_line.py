@@ -34,6 +34,10 @@ class payment_line(orm.Model):
         'invoice_amount': fields.related(
             'move_line_id', 'amount_residual', type='float', string='Total Amount',
             readonly=True),
+        'partner_ref': fields.related(
+            'partner_id', 'ref', type='string', string='partner ref',
+            readonly=True),
+        
     }
 
     

@@ -25,7 +25,7 @@ class payment_order(osv.osv):
         res = {}
         for order in self.browse(cursor, user, ids, context=context):
             if order.line_ids:
-                res[order.id] = reduce(lambda x, y: x + y.invoice_amount, order.line_ids, 0.0)
+                res[order.id] = reduce(lambda x, y: x + y.invoice_amount if y.move_line_id.invoice.type=="out_invoice" else  x - y.invoice_amount, order.line_ids, 0.0)
             else:
                 res[order.id] = 0.0
         return res
