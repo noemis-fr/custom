@@ -125,7 +125,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     def company_name(self, cr, uid, vals, context=None):
         name=vals.company_id.name.upper()
 #         _logger len 
-        name=name.ljust(25,' ')
+        name = self.normalize_string( cr, uid, vals,name,25)
         return name
         
     def bankruptcy_date(self, cr, uid, vals, context=None):
@@ -151,6 +151,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def customer_sequential_code(self, cr, uid, vals, context=None):
         lines_count=str(vals[0])
+        lines_count=lines_count[:6]
         lines_count=lines_count.rjust(6,'0')
         return lines_count
         
@@ -158,6 +159,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         siret = ""
         if vals.partner_id.commercial_partner_id.siret:
             siret=vals.partner_id.commercial_partner_id.siret
+            siret=siret[:14]
             siret=siret.rjust(14,'0')
         siret=siret.ljust(14,' ')
         return siret
@@ -165,7 +167,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     
     def customer_name(self, cr, uid, vals, context=None):
         name=vals.partner_id.commercial_partner_id.name
-        name=name.ljust(15,' ')
+        name=self.normalize_string( cr, uid, vals,name,15)
         return name
     
     def customer_account_number(self, cr, uid, vals, context=None):
@@ -188,12 +190,12 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def move_id(self, cr, uid, vals, context=None):
         move_id = vals.move_id.name
-        move_id=move_id.ljust(30,' ')
+        move_id=self.normalize_string( cr, uid, vals,move_id,30)
         return move_id
         
     def natixis_move_id(self, cr, uid, vals, context=None):
         natixis_move_id = vals.move_id.name+parser.parse(vals.date_maturity).strftime('%d%m%Y')
-        natixis_move_id=natixis_move_id.ljust(30,' ')
+        natixis_move_id = self.normalize_string( cr, uid, vals,natixis_move_id,30)
         return natixis_move_id
         
     def move_type(self, cr, uid, vals, context=None):
@@ -229,7 +231,10 @@ class banking_export_natixis_wizard(orm.TransientModel):
     def line_total_amount(self, cr, uid, vals,total_amount, context=None):
         total=""
         if vals.amount_residual:
-            total_amount[0] +=vals.amount_residual
+            if vals.invoice.type=="out_invoice":
+                total_amount[0] +=vals.amount_residual
+            elif vals.invoice.type=="out_refund":
+                total_amount[0] -=vals.amount_residual
             total ="%.2f" % vals.amount_residual
         total=total.replace(',','')
         total=total.replace('.','')
@@ -444,7 +449,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         value = self.create_footer(cr, uid, payment_order,nb_lines,total_amount, context)
         xml_root+=value
 
-        transactions_count_1_6 = 0
+        transactions_count_1_6 = len(payment_order.line_ids)
 
         return self.finalize_natixis_file_creation(
             cr, uid, ids, xml_root, total_amount[0], transactions_count_1_6,
@@ -488,7 +493,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
             'total_amount': total_amount,
             'nb_transactions': transactions_count,
             'file': base64.encodestring(xml_string.encode('utf8')),
-#             'payment_order_ids': [(
+             'payment_order_ids': context['active_id']
 #                 6, 0, [x.id for x in gen_args['sepa_export'].payment_order_ids]
 #             )],
         }
@@ -512,3 +517,12 @@ class banking_export_natixis_wizard(orm.TransientModel):
             context=context)
         wf_service = netsvc.LocalService('workflow')
         return {'type': 'ir.actions.act_window_close'}
+    
+    def normalize_string(self, cr, uid, ids, field_name, field_size,caracter =' '):
+        res=field_name
+        if len(res)>field_size:
+            res=res[:field_size]
+        else :
+            res = res.ljust(field_size,caracter)
+        return res
+        

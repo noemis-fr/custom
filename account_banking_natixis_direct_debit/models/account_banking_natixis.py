@@ -28,24 +28,22 @@ class banking_export_natixis(orm.Model):
 
     def _generate_filename(self, cr, uid, ids, name, arg, context=None):
         res = {}
-        for sepa_file in self.browse(cr, uid, ids, context=context):
-            if not sepa_file.payment_order_ids:
+        for natixis_file in self.browse(cr, uid, ids, context=context):
+            if not natixis_file.payment_order_ids:
                 label = 'no payment order'
             else:
-                ref = sepa_file.payment_order_ids[0].reference
+                ref = natixis_file.payment_order_ids.reference
                 if ref:
                     label = unidecode(ref.replace('/', '-'))
                 else:
                     label = 'error'
-            res[sepa_file.id] = 'natixis_%s.txt' % label
+            res[natixis_file.id] = 'natixis_%s.txt' % label
         return res
 
     _columns = {
-        'payment_order_ids': fields.many2many(
+        'payment_order_ids':fields.many2one(
             'payment.order',
-            'account_payment_order_natixis_rel',
-            'banking_export_natixis_id', 'account_order_id',
-            'Payment Orders',
+            string='Payment Orders',
             readonly=True),
         'nb_transactions': fields.integer(
             'Number of Transactions', readonly=True),

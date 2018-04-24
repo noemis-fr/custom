@@ -20,6 +20,34 @@
                      <xpath expr="//field[@name='total']" position="replace">
                      	<field name="total_residual"/>
                     </xpath>
+		        <xpath expr="//field[@name='line_ids']/tree/field[@name='partner_id']" position="after">
+		            <field name="partner_ref"/>
+		        </xpath>
+		        
+		        <xpath expr="//tree/field[@name='bank_id']" position="attributes">
+		                	 <attribute name="invisible">True</attribute>
+		            
+		        </xpath>
+		        <xpath expr="//tree/field[@name='date']" position="attributes">
+		                	 <attribute name="invisible">True</attribute>
+		            
+		        </xpath>
+                    
+            </field>
+        </record>
+        
+         <record id="view_payment_order_tree_form_natixis" model="ir.ui.view">
+            <field name="name">payment.order.tree.form.natixis</field>
+            <field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_tree"/>
+            <field name="arch" type="xml">
+                    <field name="total" position="attributes">
+                	 <attribute name="invisible">True</attribute>
+                	</field>
+
+                    <field name="total" position="after">
+	                	<field name="total_residual"/>
+	                </field>
             </field>
         </record>
 
