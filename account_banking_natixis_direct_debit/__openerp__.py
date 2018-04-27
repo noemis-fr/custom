@@ -14,6 +14,7 @@
         'account_direct_debit',
         'account_banking_pain_base',
         'account_payment_partner',
+        'account'
     ],
     'external_dependencies': {
         'python': ['unidecode', 'lxml'],
