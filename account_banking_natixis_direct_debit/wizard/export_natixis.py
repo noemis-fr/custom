@@ -29,6 +29,7 @@ from lxml import etree
 from dateutil import parser
 import base64
 import unicodedata
+import re
 
 class banking_export_natixis_wizard(orm.TransientModel):
     _name = 'banking.export.natixis.wizard'
@@ -173,8 +174,14 @@ class banking_export_natixis_wizard(orm.TransientModel):
     
     def customer_account_number(self, cr, uid, vals, context=None):
         account=""
-        if vals.partner_id.commercial_partner_id.id:
+        if vals.partner_id.commercial_partner_id.ref:
             account = str(vals.partner_id.commercial_partner_id.ref)
+            account = account.rjust(4,'0')
+        else:
+            raise orm.except_orm(
+                            _('Error:'),
+                            _("Le client %s n'a pas de numéro de référence Natixis renseigné.")
+                            % (vals.partner_id.commercial_partner_id.name))
         account=account.ljust(10,' ')
         return account
         
@@ -195,7 +202,13 @@ class banking_export_natixis_wizard(orm.TransientModel):
         return move_id
         
     def natixis_move_id(self, cr, uid, vals, context=None):
-        natixis_move_id = vals.move_id.name+parser.parse(vals.date_maturity).strftime('%d%m%Y')
+        natixis_move_id=""
+        if not vals.invoice.historic_invoice:
+            natixis_move_id = vals.move_id.name+parser.parse(vals.date_maturity).strftime('%d%m%Y')
+        else :
+            chn_mdp = r'\D'
+            exp_mdp = re.compile(chn_mdp)
+            natixis_move_id=exp_mdp.sub('',vals.move_id.name)
         natixis_move_id = self.normalize_string( cr, uid, vals,natixis_move_id,30)
         return natixis_move_id
         
