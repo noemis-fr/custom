@@ -28,6 +28,7 @@ from datetime import datetime, timedelta
 from lxml import etree
 from dateutil import parser
 import base64
+import unicodedata
 
 class banking_export_natixis_wizard(orm.TransientModel):
     _name = 'banking.export.natixis.wizard'
@@ -174,7 +175,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         account=""
         if vals.partner_id.commercial_partner_id.id:
             account = str(vals.partner_id.commercial_partner_id.ref)
-        account=account.rjust(10,'0')
+        account=account.ljust(10,' ')
         return account
         
         
@@ -519,7 +520,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         return {'type': 'ir.actions.act_window_close'}
     
     def normalize_string(self, cr, uid, ids, field_name, field_size,caracter =' '):
-        res=field_name
+        res=unicodedata.normalize('NFD', field_name).encode('ascii', 'ignore') 
         if len(res)>field_size:
             res=res[:field_size]
         else :
