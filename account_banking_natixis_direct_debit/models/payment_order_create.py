@@ -5,7 +5,7 @@
 ##############################################################################
 
 from openerp.osv import orm
-from mock.mock import right
+# from mock.mock import right
 from openerp.osv import expression
 
 
