@@ -187,7 +187,12 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
         
     def activity(self, cr, uid, vals, context=None):
-        if vals.partner_id.commercial_partner_id.country_id.code =="FR":
+        country_code=""
+        if vals.partner_id.commercial_partner_id.fiscal_country_id:
+            country_code=vals.partner_id.commercial_partner_id.fiscal_country_id.code
+        else:
+            country_code=vals.partner_id.commercial_partner_id.country_id.code
+        if country_code =="FR":
             return"D"
         return "E"
         
