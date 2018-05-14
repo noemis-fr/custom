@@ -10,3 +10,4 @@ from . import account_banking_natixis
 from . import invoice
 from . import account_payment_order
 from . import payment_line
+from . import partner

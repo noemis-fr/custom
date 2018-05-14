@@ -27,6 +27,7 @@
         'views/invoice.xml',
         'data/payment_type_natixis.xml',
         'views/account_payment_view.xml',
+        'views/partner.xml',
     ],
     'demo': ['sepa_direct_debit_demo.xml'],
     'description': '''
