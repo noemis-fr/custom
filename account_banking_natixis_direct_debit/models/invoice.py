@@ -15,6 +15,6 @@ class account_invoice(orm.Model):
 
     _columns = {
         'payment_type': fields.selection([('CHQ','check'), ('VIR','transfert'),('TRT','effect')],'payment type'),
-        'payment_line_ids': fields.one2many('payment.line', 'account_invoice_id', readonly=True),
-        'historic_invoice': fields.boolean( string ='old sent invoice to natixis'),
+        'payment_line_ids': fields.one2many('payment.line', 'account_invoice_id', readonly=True, copy=False),
+        'historic_invoice': fields.boolean( string ='Old invoice sent to natixis'),
     }

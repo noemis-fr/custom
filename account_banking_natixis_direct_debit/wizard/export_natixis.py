@@ -239,7 +239,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
     
     def move_date(self, cr, uid, vals, context=None):
         
-        date=parser.parse(vals.date_created).strftime('%d%m%Y')
+        date=parser.parse(vals.date).strftime('%d%m%Y')
         return date
     
     def maturity_date(self, cr, uid, vals, context=None):

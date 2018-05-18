@@ -54,6 +54,7 @@
                     <field name="total_standard_price" string="Total QOH Value" sum="Total Available Value"/>
                     <field name="stored_virtual_available" string="Total FQ" sum="Total Forecasted Quantity"/>
                     <field name="total_standard_price_virtual" string="Total FQ Value" sum="Total Forcasted Value"/>
+                    <field name="stored_intermediate_stock" string="QSD" sum="Total QSD"/>
                     <field name="lst_price"/>
                     <field name="company_id" groups="base.group_multi_company" invisible="1"/>
                 </tree>
@@ -141,11 +142,14 @@
             <field name="inherit_id" ref="product.product_search_form_view" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <filter string="Total Quantity On Hand &gt; 0" name="qty_available_positive" domain="[('stored_qty_available', '&gt;', 0)]" />
-                    <filter string="Total Quantity On Hand &lt;= 0" name="qty_available_negative" domain="[('stored_qty_available', '&lt;=', 0)]" />
+                    <filter string="Total Quantity On Hand &gt; 0" name="qty_available_positive" domain="[('stored_qty_available', '&gt;', 0)]"/>
+                    <filter string="Total Quantity On Hand &lt;= 0" name="qty_available_negative" domain="[('stored_qty_available', '&lt;=', 0)]"/>
                     <separator/>
-                    <filter string="Total Forcasted Quantity &gt; 0" name="virtual_available_positive" domain="[('stored_virtual_available', '&gt;', 0)]" />
-                    <filter string="Total Forcasted Quantity &lt;= 0" name="virtual_available_negative" domain="[('stored_virtual_available', '&lt;=', 0)]" />
+                    <filter string="Total Forcasted Quantity &gt; 0" name="virtual_available_positive" domain="[('stored_virtual_available', '&gt;', 0)]"/>
+                    <filter string="Total Forcasted Quantity &lt;= 0" name="virtual_available_negative" domain="[('stored_virtual_available', '&lt;=', 0)]"/>
+                    <separator/>
+                    <filter string="Total QSD &gt;= 0" name="qsd_available_positive" domain="[('stored_intermediate_stock', '&gt;=', 0)]"/>
+                    <filter string="Total QSD &lt;= 0" name="qsd_available_negative" domain="[('stored_intermediate_stock', '&lt;=', 0)]"/>
                     <separator/>
                 </field>
             </field>
