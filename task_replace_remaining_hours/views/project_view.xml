@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="project_task_inherited_form" model="ir.ui.view">
+            <field name="name">project.task.inherited.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+            	<field name ="remaining_hours" position="replace">
+                	<field name="remain_hours" widget="float_time" attrs="{'readonly':[('state','in',('done','cancelled'))]}" groups="project.group_time_work_estimation_tasks"/> 
+            	</field>
+            	<field name ="total_hours" position="replace">
+                	<field name="noemis_task_total" widget="float_time" class="oe_subtotal_footer_separator"/> 
+            	</field>
+            </field>
+        </record>
+        
+        <record id="project_task_inherited_tree" model="ir.ui.view">
+            <field name="name">project.task.inherited.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+            	 <field name="progress" position="after">
+                	<field name="remain_hours" widget="float_time" sum="Noemis Spent Hours"/>
+            	</field>
+            	<field name="effective_hours" position="attributes">
+            		<attribute name="invisible">0</attribute>
+            	</field>
+            </field>
+        </record>
+    </data>
+</openerp>
