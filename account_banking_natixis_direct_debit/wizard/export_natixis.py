@@ -141,7 +141,7 @@ class banking_export_natixis_wizard(orm.TransientModel):
         return date
     
     def reference(self, cr, uid, vals, context=None):
-        return "123"
+        return self.pool.get('ir.sequence').get(cr, uid, 'banking.export.natixis.wizard')
     
     def version(self, cr, uid, vals, context=None):
         return "7.0"
