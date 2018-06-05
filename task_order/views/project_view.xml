@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_task_order_search_form" model="ir.ui.view">
+            <field name="name">task.order.search.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                 	<filter string="Orders" name="group_order_id" domain="[]" context="{'group_by':'sale_order_id'}"/>
+                </xpath>
+                
+                <field name ="project_id" position="before">
+                	<separator/>
+                    <field name="sale_order_id"/>
+            	</field>
+            </field>
+        </record>
+        
+        <record id="project_order_task_inherited_form" model="ir.ui.view">
+            <field name="name">project.order.task.inherited.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field eval="18" name="priority"/>
+            <field name="arch" type="xml">
+            	<field name ="progress" position="after">
+                	<field name="sale_order_id"/> 
+            	</field>
+            </field>
+        </record>
+    </data>
+</openerp>
