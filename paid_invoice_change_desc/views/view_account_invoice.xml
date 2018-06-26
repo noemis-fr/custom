@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp><data>
+
+        <record id="account_invoice_change_desc_form" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="invoice_line" position="replace">
+                    <field name="invoice_line" nolabel="1" widget="one2many_list" context="{'type': type, 'company_id': company_id}" >
+                                <tree string="Invoice Lines" editable="bottom">
+                                	<field name="invoice_state" invisible="1"/>
+                                    <field name="sequence" widget="handle" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="product_id" on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="name" attrs="{'readonly': [('invoice_state', '=', 'paid')]}"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="account_id" groups="account.group_account_user" domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '=', 'other')]" on_change="onchange_account_id(product_id, parent.partner_id, parent.type, parent.fiscal_position,account_id)" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="account_analytic_id" groups="analytic.group_analytic_accounting" domain="[('type','!=','view'), ('company_id', '=', parent.company_id), ('state','not in',('close','cancelled'))]" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="quantity" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="uos_id" groups="product.group_uom" on_change="uos_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, context, parent.company_id)" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="price_unit" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="discount" groups="sale.group_discount_per_so_line" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="invoice_line_tax_id" widget="many2many_tags" context="{'type':parent.type}" domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                    <field name="price_subtotal" attrs="{'readonly': [('invoice_state', 'in', ['paid','open'])]}"/>
+                                </tree>
+                            </field>
+                </field>
+            </field>
+        </record>
+
+</data></openerp>
