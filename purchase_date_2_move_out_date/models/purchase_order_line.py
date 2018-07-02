@@ -56,7 +56,7 @@ class PurchaseOrderLine(Model):
                 if purchase_order_line.product_id.produce_delay:
                     delivery_date = (
                         datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
-                        timedelta(days=self.product_id.produce_delay)
+                        timedelta(days=purchase_order_line.product_id.produce_delay)
                         ).strftime('%Y-%m-%d')
                 # Get 'in' Moves linked to the current Purchase Order Line
                 move_in_ids = move_obj.search(
