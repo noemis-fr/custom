@@ -46,18 +46,18 @@ class PurchaseOrderLine(Model):
         manually_changed = context.get('manually_changed', False)
         _logger.debug("MANUALLY CHANGED ? : %s" % manually_changed)
         if 'date_planned' in vals :
-            if self.product_id.produce_delay:
-                delivery_date = (
-                    datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
-                    timedelta(days=self.product_id.produce_delay)
-                    ).strftime('%Y-%m-%d')
-            else:
-                delivery_date = (
-                    datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
-                    timedelta(days=self._DELIVERY_DELAY_DAYS)
-                    ).strftime('%Y-%m-%d')
+            delivery_date = (
+                datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
+                timedelta(days=self._DELIVERY_DELAY_DAYS)
+                ).strftime('%Y-%m-%d')
             for purchase_order_line in self.browse(
                     cr, uid, ids, context=context):
+                
+                if purchase_order_line.product_id.produce_delay:
+                    delivery_date = (
+                        datetime.strptime(vals['date_planned'], "%Y-%m-%d") +
+                        timedelta(days=self.product_id.produce_delay)
+                        ).strftime('%Y-%m-%d')
                 # Get 'in' Moves linked to the current Purchase Order Line
                 move_in_ids = move_obj.search(
                     cr, uid,
