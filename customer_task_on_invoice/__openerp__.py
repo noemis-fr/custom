@@ -43,7 +43,7 @@ Copyright
     'data': [
         'views/invoice.xml',
         'views/picking.xml',
-        'views/partner.xml',
+#         'views/partner.xml',
     ],
     'demo': [
     ],

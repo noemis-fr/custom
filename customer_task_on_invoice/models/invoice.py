@@ -31,7 +31,8 @@ class Invoice(Model):
 
     _columns = {
         'memo_task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True),
-        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True)
+        'task_ids': fields.related('partner_id','memo_task_ids', type='one2many', relation='project.task', string='Tasks', readonly=True),
+        'partner_comment': fields.related('partner_id','comment', type='text', string='Memo', readonly=True)
     }
 
     
