@@ -208,6 +208,13 @@ class banking_export_natixis_wizard(orm.TransientModel):
         
     def natixis_move_id(self, cr, uid, vals, context=None):
         natixis_move_id=""
+        
+        if (not vals.date_maturity) :
+            raise orm.except_orm(
+                            _('Error:'),
+                            _("La pièce  %s n'a pas de date de maturité renseignée.")
+                            % (vals.move_id.name))
+        
         if not vals.invoice.historic_invoice:
             natixis_move_id = vals.move_id.name+parser.parse(vals.date_maturity).strftime('%d%m%Y')
         else :
