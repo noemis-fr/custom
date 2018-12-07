@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Sale Order - add ADT date and filters',
+    'name': 'Sale Order - add ADV date and filters',
     'version': '9.0.1.0',
     'category': '',
     'description': """
