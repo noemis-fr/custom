@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!--    See ../__openerp__.py file for copyright and licences              -->
+<!-- ********************************************************************** -->
+<openerp>
+    <data>
+
+        <record id="view_sale_order_form_button" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/h1" position="after">
+                	<div class="oe_right oe_button_box" name="buttons"> 
+	                    <button name="validate_validation_request_date"  type="object" icon="stock_graph" class="oe_highlight" string="Validate request" />
+	                    <button name="validate_express"  type="object" icon="stock_graph" class="oe_highlight" string="Validate express" />
+	                    <button name="validate_blocked_in_account"  type="object" icon="stock_graph" class="oe_highlight" string="block in invoice" />
+	             	</div>
+                </xpath>
+                
+                 <xpath expr="//sheet/group/group[2]" position="inside">
+                    <field name="validation_request_date"/> 
+                    <field name="validation_request_date_box"/>
+                    <field name="express"/>
+                    <field name="account_box" />
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_sale_order_tree_button" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+
+            <field name="arch" type="xml">
+                
+                 <field name="state" position="before">
+                    <field name="validation_request_date"/> 
+                    <field name="validation_request_date_box"/>
+                </field>
+            </field>
+        </record>
+        
+       <record id="view_sale_order_tree_button" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+
+            <field name="arch" type="xml">
+                
+                 <field name="state" position="before">
+                    <field name="validation_request_date"/> 
+                    <field name="validation_request_date_box"/>
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_sale_order_search" model="ir.ui.view">
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                <field name="project_id" position="after">
+                    <filter string="no validate" name="qty_available_positive" domain="[('validation_request_date_box', '=', False)]"/>
+                    <separator/>
+                </field>
+            </field>
+        </record>
+        
+        
+         
+
+    </data>
+</openerp>
