@@ -87,6 +87,6 @@ class sale_order(Model):
         order = self.browse(cr, uid, ids[0], context=context)
         
         for line in order.order_line:
-            if line.product_id and line.layout_type!="article" :
+            if not line.product_id and line.layout_type=="article" :
                 raise osv.except_osv(_('Error'), _('You can not have one product and type different of "P" on the same line.'))
         return super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
