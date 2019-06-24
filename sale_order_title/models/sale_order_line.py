@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import fields
+from openerp.osv import fields, osv
 from openerp.osv.orm import Model
 from openerp.tools.translate import _
 
@@ -77,3 +77,16 @@ class sale_order_line(Model):
         elif layout_type == 'break':
             res['value']['name'] = _('PAGE BREAK')
         return res
+    
+class sale_order(Model):
+    _inherit = 'sale.order'
+    
+    def action_button_confirm(self, cr, uid, ids, context=None):
+        # fetch the partner's id and subscribe the partner to the sale order
+        assert len(ids) == 1
+        order = self.browse(cr, uid, ids[0], context=context)
+        
+        for line in order.order_line:
+            if line.product_id and line.layout_type!="article" :
+                raise osv.except_osv(_('Error'), _('You can not have one product and type different of "P" on the same line.'))
+        return super(sale_order, self).action_button_confirm(cr, uid, ids, context=context)
